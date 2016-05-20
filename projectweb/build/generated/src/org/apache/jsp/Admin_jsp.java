@@ -55,10 +55,7 @@ public final class Admin_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        <!-- Optional theme -->\n");
       out.write("        <link rel=\"stylesheet\" href=\"./style/css/bootstrap-theme.min.css\" >\n");
       out.write("\n");
-      out.write("        <!-- Latest compiled and minified JavaScript -->\n");
-      out.write("        <script src=\"./style/js/bootstrap.min.js\"></script>\n");
-      out.write("        <script src=\"./style/js/angular.min.js\"></script>\n");
-      out.write("        <script type=”text/javascript” src=”./style/js/jquery.min.js”></script>\n");
+      out.write("\n");
       out.write("        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->\n");
       out.write("        <!--[if lt IE 9]>\n");
       out.write("          <script src=\"https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js\"></script>\n");
@@ -98,8 +95,21 @@ public final class Admin_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                </div><!--/.nav-collapse -->\n");
       out.write("            </div>\n");
       out.write("        </nav>\n");
-      out.write("        {{2 + 3}}\n");
-      out.write("        <h1>Hello World!</h1>\n");
+      out.write("        <div class=\"container theme-showcase\" role=\"main\">\n");
+      out.write("            \n");
+      out.write("            ");
+ response.sendRedirect("http://www.google.com");   
+      out.write("\n");
+      out.write("            <div class=\"jumbotron\">\n");
+      out.write("                <h1>Hello World!</h1>\n");
+      out.write("                <p>{{2 + 3}}</p>\n");
+      out.write("            </div>\n");
+      out.write("        </div>\n");
+      out.write("        <!-- Latest compiled and minified JavaScript -->\n");
+      out.write("        <script type=\"text/javascript\" src=\"./style/js/jquery.min.js\"></script>\n");
+      out.write("        <script src=\"./style/js/bootstrap.min.js\"></script>\n");
+      out.write("        <script src=\"./style/js/angular.min.js\"></script>\n");
+      out.write("\n");
       out.write("    </body>\n");
       out.write("</html>\n");
     } catch (Throwable t) {

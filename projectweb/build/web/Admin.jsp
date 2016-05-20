@@ -58,7 +58,7 @@
         </nav>
         <div class="container theme-showcase" role="main">
             
-            
+            <% //response.sendRedirect("http://www.google.com");   %>
             <div class="jumbotron">
                 <h1>Hello World!</h1>
                 <p>{{2 + 3}}</p>
