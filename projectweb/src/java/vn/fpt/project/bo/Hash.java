@@ -28,7 +28,7 @@ public class Hash {
 
             return hexString.toString();
         } catch (Exception ex) {
-            throw new RuntimeException(ex);
+           return null;
         }
     }
 }
