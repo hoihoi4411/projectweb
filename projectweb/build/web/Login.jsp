@@ -4,8 +4,7 @@
     Author     : MyPC
 --%>
 
-<%@page import="javax.print.attribute.HashAttributeSet"%>
-<%@page import="vn.fpt.project.bo.Hash"%>
+<%@page import="vn.fpt.project.bo.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -26,11 +25,34 @@
         <%
             String token = Hash.generateToken();
             session.setAttribute("token", token);
+            String errors = "";
             if (request.getParameter("token") != session.getAttribute(token)) {
-                
+                session.removeAttribute("token");
+                Admin user = new Admin();
+                Validation validation = new Validation();
+                String username = request.getParameter("username");
+                String password = request.getParameter("password");
+                if (validation.StringFormatOnlyLetterAndDigits(username, 5, 30, "username") && validation.StringFormatMinMax(password, 5, 15, "password")) {
+                    boolean re = user.isAdmin(request.getParameter("username"), request.getParameter("password"));
+                    if (re) {
+                        session.setAttribute("admin", request.getParameter("username"));
+                    } else {
+                        errors = "You Not Admin";
+                    }
+                } else {
+                    errors = validation.getShowErrors();
+                }
+
             }
+            //out.print(session.getAttribute("user"));
         %>
         <div class="container">
+            <% if (!errors.equals("")) {%>
+            <div class="alert alert-dismissible alert-danger">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>Oh snap!</strong> <%= errors %>
+            </div>
+            <% }%>
             <form class="form-signin" action="" method="POST" name="myForm">
                 <h2 class="form-signin-heading">Please sign in</h2>
                 <label for="inputEmail" class="sr-only">Username</label>
@@ -39,7 +61,7 @@
                 <label for="inputPassword" class="sr-only">Password</label>
                 <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password" ng-model="password" required>
                 <span ng-show="myForm.password.$touched && myForm.password.$invalid" class="label label-danger">The password is required.</span>
-                
+
                 <div class="checkbox">
                     <label>
                         <input type="checkbox" value="remember-me" name="remember-me"> Remember me
@@ -48,6 +70,7 @@
                 </div>
                 <input type="submit" class="btn btn-lg btn-primary btn-block" value="Sign in">
             </form>
+
         </div> <!-- /container -->
         <!-- Latest compiled and minified JavaScript -->
         <script type="text/javascript" src="./style/js/jquery.min.js"></script>
