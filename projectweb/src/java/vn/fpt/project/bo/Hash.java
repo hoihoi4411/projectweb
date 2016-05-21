@@ -51,4 +51,5 @@ public class Hash {
 
         return Sha256(captchaStringBuffer.toString());
     }
+
 }

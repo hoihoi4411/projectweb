@@ -23,6 +23,9 @@
     </head>
     <body ng-app="">
         <%
+            if(session.getAttribute("admin") != null){
+                response.sendRedirect("./Admin.jsp");
+            }
             String token = Hash.generateToken();
             session.setAttribute("token", token);
             String errors = "";
@@ -36,6 +39,7 @@
                     boolean re = user.isAdmin(request.getParameter("username"), request.getParameter("password"));
                     if (re) {
                         session.setAttribute("admin", request.getParameter("username"));
+                        response.sendRedirect("./Admin.jsp");
                     } else {
                         errors = "You Not Admin";
                     }
@@ -44,7 +48,6 @@
                 }
 
             }
-            //out.print(session.getAttribute("user"));
         %>
         <div class="container">
             <% if (!errors.equals("")) {%>
