@@ -3,7 +3,7 @@ USE  PROJECT_G3;
 CREATE TABLE Pro_Users (
 	uid int IDENTITY(1,1) PRIMARY KEY NOT NULL,
 	username nvarchar(30) NOT NULL UNIQUE,
-	password nvarchar(60) NOT NULL,
+	password nvarchar(64) NOT NULL,
 	permission int DEFAULT(1) 	
 ) ; 
 CREATE TABLE Pro_Lesson(

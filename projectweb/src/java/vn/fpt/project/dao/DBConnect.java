@@ -6,8 +6,6 @@
 package vn.fpt.project.dao;
 
 import java.sql.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import vn.fpt.project.bo.*;
 
 /**
@@ -40,13 +38,13 @@ public class DBConnect {
     final String[] FIELD_TABLE_LESSON = {"lid", "title", "uid", "share"};
     final String[] FIELD_TABLE_QUIZ = {"qid", "question", "answer", "lid"};
     final String[] FIELD_TABLE_LESSON_PK_FOLDER = {"fid", "lid"};
-
+    private String errors ;
     public DBConnect() {
         try {
             Class.forName(urlClass);
             connect = DriverManager.getConnection("jdbc:sqlserver://" + serverName + ":" + port + ";databaseName = " + dataName + " ", user, pass);
         } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(DBConnect.class.getName()).log(Level.SEVERE, null, ex);
+            errors = "Cannot connect to database";
         }
 
     }
@@ -63,8 +61,20 @@ public class DBConnect {
 
     }
 
+    public int toCountTable(String table, String where) throws SQLException {
+        PreparedStatement query = null;
+        String SQL = "SELECT COUNT (*) As count FROM " + table + "  where " + where;
+        query = connect.prepareStatement(SQL);
+        ResultSet relts = query.executeQuery();
+        int count = 0;
+        while (relts.next()) {
+            count = relts.getInt("count");
+        }
+        return count;
+    }
+
     public Object getFirst(String table, String where) throws SQLException {
-        if(where.equals("")){
+        if (where.equals("")) {
             return null;
         }
         ResultSet resultSet = selectQuery(table, where);
@@ -139,5 +149,4 @@ public class DBConnect {
 //            DB.toCloseData();
 //        }
 //    }
-
 }
