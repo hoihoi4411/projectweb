@@ -27,17 +27,17 @@ public class DBConnect {
     /**
      * Field table in database
      */
-    final String TABLE_USERS = "Pro_Users";
-    final String TABLE_FOLDER = "Pro_Folder";
-    final String TABLE_LESSON = "Pro_Lesson";
-    final String TABLE_QUIZ = "Pro_Quiz";
-    final String TABLE_LESSON_PK_FOLDER = "Pro_Folder_PK_Pro_Lesson";
+    public final String TABLE_USERS = "Pro_Users";
+    public final String TABLE_FOLDER = "Pro_Folder";
+    public final String TABLE_LESSON = "Pro_Lesson";
+    public final String TABLE_QUIZ = "Pro_Quiz";
+    public final String TABLE_LESSON_PK_FOLDER = "Pro_Folder_PK_Pro_Lesson";
 
-    final String[] FIELD_TABLE_USERS = {"uid", "username", "password", "permission"};
-    final String[] FIELD_TABLE_FOLDER = {"fid", "name", "uid", "sharefolder"};
-    final String[] FIELD_TABLE_LESSON = {"lid", "title", "uid", "share"};
-    final String[] FIELD_TABLE_QUIZ = {"qid", "question", "answer", "lid"};
-    final String[] FIELD_TABLE_LESSON_PK_FOLDER = {"fid", "lid"};
+    public final String[] FIELD_TABLE_USERS = {"uid", "username", "password", "permission"};
+    public final String[] FIELD_TABLE_FOLDER = {"fid", "name", "uid", "sharefolder"};
+    public final String[] FIELD_TABLE_LESSON = {"lid", "title", "uid", "share"};
+    public final String[] FIELD_TABLE_QUIZ = {"qid", "question", "answer", "lid"};
+    public final String[] FIELD_TABLE_LESSON_PK_FOLDER = {"fid", "lid"};
     private String errors ;
     public DBConnect() {
         try {
@@ -137,6 +137,7 @@ public class DBConnect {
             return false;
         }
     }
+    
 
 //    public static void main(String[] args) {
 //        DBConnect DB = new DBConnect();

@@ -5,15 +5,20 @@
  */
 package vn.fpt.project.bo;
 
+import java.sql.SQLException;
+import vn.fpt.project.dao.DBConnect;
+
 /**
  *
  * @author MyPC
  */
 public class Users {
+
     private int uid;
     private String username;
     private String password;
     private int permission;
+    private DBConnect DB;
 
     public Users(int uid, String username, String password, int permission) {
         this.uid = uid;
@@ -21,10 +26,24 @@ public class Users {
         this.password = password;
         this.permission = permission;
     }
-    
-    
+
     public Users() {
+        DB = new DBConnect();
         permission = 1;
+    }
+
+    public boolean isLoggin(String username, String password) {
+        try {
+            String where = "username = '" + username + "' and password = '" + Hash.Sha256(password + username) + "'";
+            int count = DB.toCountTable(DB.TABLE_USERS, where);
+            if (count == 1) {
+                return true;
+            }
+
+        } catch (SQLException ex) {
+            return false;
+        }
+        return false;
     }
 
     public int getUid() {
@@ -58,6 +77,5 @@ public class Users {
     public void setPermission(int permission) {
         this.permission = permission;
     }
-    
-    
+
 }
