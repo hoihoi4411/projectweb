@@ -139,15 +139,16 @@ public class DBConnect {
     }
     
 
-//    public static void main(String[] args) {
-//        DBConnect DB = new DBConnect();
-//        try {
-//            Object re = DB.getFirst(DB.TABLE_USERS, "uid = 1");
-//            System.out.println(re);
-//        } catch (SQLException ex) {
-//            Logger.getLogger(DBConnect.class.getName()).log(Level.SEVERE, null, ex);
-//        } finally {
-//            DB.toCloseData();
-//        }
-//    }
+    public static void main(String[] args) {
+        DBConnect DB = new DBConnect();
+        try {
+            ResultSet re = DB.selectQuery(DB.TABLE_USERS, "");
+            while (re.next()) {                
+                System.out.println(re.getInt("uid"));
+            }
+        } catch (SQLException ex) {
+        } finally {
+            DB.toCloseData();
+        }
+    }
 }

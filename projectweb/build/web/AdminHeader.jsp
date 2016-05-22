@@ -1,3 +1,4 @@
+<%@page import="vn.fpt.project.bao.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,8 +14,9 @@
         <!-- Custom CSS -->
         <link href="./style/css/admin.css" rel="stylesheet">
         <link href="./style/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-        <!-- MetisMenu CSS -->
-        <link href="../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+        <!-- DataTables CSS -->
+        <link href="./style/css/dataTables.bootstrap.css" rel="stylesheet">
+
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
           <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -26,7 +28,8 @@
             if (session.getAttribute("admin") == null) {
                 response.sendRedirect("./LoginAdmin.jsp");
             }
-
+            ListUser list = new ListUser();
+             list. getListData();
         %>
 
         <div id="wrapper">
@@ -63,7 +66,7 @@
                                     <i class="fa fa-tasks fa-fw"></i> Tiếng Anh
                                 </a>
                             </li>
-                            
+
                         </ul>
                         <!-- /.dropdown-alerts -->
                     </li>
@@ -107,7 +110,7 @@
                             <li>
                                 <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Users <span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
-                                     <li>
+                                    <li>
                                         <a href="./AdminUser.jsp">Users</a>
                                     </li>
                                     <li>
