@@ -29,7 +29,7 @@ public class ListUser {
         this.listUser = listUser;
     }
 
-    public  void getListData() {
+    public void getListData() {
         try {
             ResultSet resultSet = DB.selectQuery(DB.TABLE_USERS, "");
             while (resultSet.next()) {
@@ -44,8 +44,23 @@ public class ListUser {
     }
 
     public ArrayList<Users> getListUser() {
-       
+
         return listUser;
     }
-    
+
+    public boolean InsertNewUser(String username, String password, String permisson) {
+        try {
+            Validation validation = new Validation();
+            int count = DB.toCountTable(DB.TABLE_USERS, "username = '" + username + "'");
+            if (count == 0) {
+                if (validation.StringFormatOnlyLetterAndDigits(username, 5, 30, "username") && validation.StringFormatMinMax(password, 5, 15, "password") && validation.NumberFormatMinMax(permisson, 1, 2, "permission")) {
+                    return DB.InsertUsers(DB.TABLE_USERS, username, password, Integer.parseInt(permisson));
+                }
+            }
+            return false;
+        } catch (SQLException ex) {
+            return false;
+        }
+    }
+
 }

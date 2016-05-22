@@ -51,5 +51,7 @@ public class Hash {
 
         return Sha256(captchaStringBuffer.toString());
     }
-
+//    public static void main(String[] args) {
+//        System.out.println(Sha256("123456dungnguyen"));
+//    }
 }

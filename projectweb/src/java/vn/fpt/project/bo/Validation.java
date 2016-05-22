@@ -26,19 +26,19 @@ public class Validation {
         try {
             int number_format = Integer.parseInt(number);
             if (number_format < min || number_format > max) {
-                showErrors += name + " must be greater than " + min + " and less than " + max + "\n";
+                showErrors += name + " must be greater than " + min + " and less than " + max + "<br>";
                 throw new Exception();
             }
             return true;
         } catch (Exception e) {
-            showErrors += name + "must be number";
+            showErrors += name + " must be number <br>";
             return false;
         }
     }
 
     public boolean StringFormatMinMax(String input, int minlenght, int maxlenght, String name) {
         if (input.length() < minlenght || input.length() > maxlenght) {
-            showErrors += name + " lenght must be greater than " + minlenght + " and less than " + maxlenght + "\n";
+            showErrors += name + " lenght must be greater than " + minlenght + " and less than " + maxlenght + "<br>";
             return false;
         }
         return true;
@@ -46,19 +46,19 @@ public class Validation {
 
     public boolean StringFormatOnlyLetterAndDigits(String input, int minlenght, int maxlenght, String name) {
         if (input.matches("^[\\w]{" + minlenght + "," + maxlenght + "}$")) {
-            showErrors += name + " must be letter or number \n";
             return true;
         }
+        showErrors += name + " must be letter or number <br>";
         return false;
     }
 
     public boolean isEmpltyOrNull(String input, String name) {
         if (input == null) {
-            showErrors += name + " is null \n";
+            showErrors += name + " is null <br>";
             return false;
         }
         if (input.equals("")) {
-            showErrors += name + " is emplty \n";
+            showErrors += name + " is emplty <br>";
             return false;
         }
         return true;

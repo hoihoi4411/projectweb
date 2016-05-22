@@ -38,7 +38,8 @@ public class DBConnect {
     public final String[] FIELD_TABLE_LESSON = {"lid", "title", "uid", "share"};
     public final String[] FIELD_TABLE_QUIZ = {"qid", "question", "answer", "lid"};
     public final String[] FIELD_TABLE_LESSON_PK_FOLDER = {"fid", "lid"};
-    private String errors ;
+    private String errors;
+
     public DBConnect() {
         try {
             Class.forName(urlClass);
@@ -71,6 +72,23 @@ public class DBConnect {
             count = relts.getInt("count");
         }
         return count;
+    }
+
+    public boolean InsertUsers(String table, String username, String password, int permisson) {
+        try {
+            String insertTableSQL = "INSERT INTO " + table + " "
+                    + "(username,password,permission) VALUES"
+                    + "(?,?,?)";
+            PreparedStatement preparedStatement;
+            preparedStatement = connect.prepareStatement(insertTableSQL);
+            preparedStatement.setString(1, username);
+            preparedStatement.setString(2, password);
+            preparedStatement.setInt(3, permisson);
+            preparedStatement.executeUpdate();
+        } catch (SQLException ex) {
+            return false;
+        }
+        return true;
     }
 
     public Object getFirst(String table, String where) throws SQLException {
@@ -137,15 +155,12 @@ public class DBConnect {
             return false;
         }
     }
-    
 
     public static void main(String[] args) {
         DBConnect DB = new DBConnect();
         try {
-            ResultSet re = DB.selectQuery(DB.TABLE_USERS, "");
-            while (re.next()) {                
-                System.out.println(re.getInt("uid"));
-            }
+            int count = DB.toCountTable(DB.TABLE_USERS, "username = 'Hoanguyen'"); 
+            System.out.println(count);
         } catch (SQLException ex) {
         } finally {
             DB.toCloseData();

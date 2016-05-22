@@ -1,4 +1,5 @@
 <%@page import="vn.fpt.project.bao.*"%>
+<%@page import="vn.fpt.project.bo.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
