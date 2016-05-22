@@ -1,17 +1,15 @@
-<%-- 
-    Document   : AdminQuiz
-    Created on : May 20, 2016, 8:55:41 PM
-    Author     : MyPC
---%>
+<%@include file="AdminHeader.jsp"  %>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-    </body>
-</html>
+
+            <div id="page-wrapper">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">Setting </h1>
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+               
+            </div>
+            <!-- /#page-wrapper -->
+
+<%@include file="AdminFooter.jsp"  %>
