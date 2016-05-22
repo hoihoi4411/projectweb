@@ -1,8 +1,7 @@
-input.ng-invalid{
-    border-color: #b94a48;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+body {
+    background-color: #f4f0ea;
 }
+
 input.ng-valid{
     border-color: #468847;
     -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
