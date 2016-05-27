@@ -1,16 +1,21 @@
-
 <%@include file="AdminHeader.jsp"  %>
-<%    String token = Hash.generateToken();
-    session.setAttribute("token", token);
-    String errors = "";
-    if (request.getParameter("token") != session.getAttribute(token)) {
+<%    String errors = "";
+    lista.getListData();
+
+    if (session.getAttribute("token") == null) {
+        String token = Hash.generateToken();
+        session.setAttribute("token", token);
+    } else {
+        String token = Hash.generateToken();
+    }
+    if (request.getParameter("token") != null && request.getParameter("token").equals(session.getAttribute("token"))) {
         session.removeAttribute("token");
         Validation validation = new Validation();
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String permisson = request.getParameter("permission");
         if (validation.StringFormatOnlyLetterAndDigits(username, 5, 30, "username") && validation.StringFormatMinMax(password, 5, 15, "password") && validation.NumberFormatMinMax(permisson, 1, 2, "permission")) {
-            boolean resu = list.InsertNewUser(username, password, permisson);
+            boolean resu = lista.InsertNewUser(username, password, permisson);
             if (resu) {
                 session.setAttribute("alert-sucess", "Insert Successful!");
                 response.sendRedirect("./AdminUser.jsp");
@@ -18,6 +23,7 @@
                 errors = "Username exits in unique";
                 session.setAttribute("alert", errors);
             }
+            //csrf
         } else {
             errors = validation.getShowErrors();
             session.setAttribute("alert", errors);
@@ -33,15 +39,17 @@
     </div>
     <div class="row">
         <div class="col-lg-12">
-            <% session.removeAttribute("alert-sucess");
-                if (session.getAttribute("alert") != null) {%>
+            <%
+                if (session.getAttribute("alert") != null) {
+                    session.removeAttribute("alert-sucess");%>
             <div class="alert alert-danger alert-dismissable">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                 <%= session.getAttribute("alert")%>
             </div>
             <%}%>
-            <%session.removeAttribute("alert");
-                if (session.getAttribute("alert-sucess") != null) {%>
+            <%
+                if (session.getAttribute("alert-sucess") != null) {
+                    session.removeAttribute("alert");%>
             <div class="alert alert-success alert-dismissable">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                 <%= session.getAttribute("alert-sucess")%>
@@ -58,7 +66,7 @@
                                 <div class="form-group">
                                     <label>Username : </label>
                                     <input class="form-control" type="text" name="username"  placeholder="Enter here Username" ng-model="username" required autocomplete="off">
-                                    <p ng-show="AddnewForm.username.$touched && AddnewForm.username.$invalid" class="label label-danger">Example block-level help text here.</p>
+                                    <p ng-show="AddnewForm.username.$touched && AddnewForm.username.$invalid" class="label label-danger">Username is required</p>
                                 </div>
                                 <div class="form-group">
                                     <label>Selects</label>
@@ -72,9 +80,9 @@
                                 <div class="form-group">
                                     <label>Password : </label>
                                     <input class="form-control" type="password" placeholder="Enter Password Here" name="password" ng-model="password" required autocomplete="off">
-                                    <p ng-show="AddnewForm.password.$touched && AddnewForm.password.$invalid" class="label label-danger">Example block-level help text here.</p>
+                                    <p ng-show="AddnewForm.password.$touched && AddnewForm.password.$invalid" class="label label-danger">Password is required</p>
                                 </div>
-                                <input type="hidden" value="<%= token%>" name="token">
+                                <input type="hidden" value="<%= session.getAttribute("token")%>" name="token">
                                 <div class="form-group">
                                     <input type="submit" class="btn btn-default" value="Add new user">
                                     <input type="reset" class="btn btn-default" value="Reset">
@@ -108,21 +116,31 @@
                             </thead>
                             <tbody>
                                 <% for (int i = 1;
-                                            i < list.getListUser()
-                                            .size(); i++) {%>
+                                            i < lista.getListUser()
+                                            .size(); i++) {
+                                        if (lista.getListUser().get(i).getPermission() != 1) {
+                                %>
+
                                 <tr class="odd gradeX">
-                                    <td><%= list.getListUser().get(i).getUid()%></td>
-                                    <td><%= list.getListUser().get(i).getUsername()%></td>
-                                    <td><%= list.getListUser().get(i).getPermission()%></td>
+                                    <td><%= lista.getListUser().get(i).getUid()%></td>
+                                    <td><a href="AdminUserPage.jsp?uid=<%= lista.getListUser().get(i).getUid() %>"><%= lista.getListUser().get(i).getUsername()%></a></td>
+                                    <td><%
+                                        if (lista.getListUser().get(i).getPermission() == 1) {
+                                            out.print("Admin");
+                                        } else {
+                                            out.print("User");
+                                        }
+                                        %></td>
                                     <td class="center">4</td>
                                     <td class="center">
-                                        <a  class="btn btn-info btn-circle" href=""><i class="fa fa-check"></i>
+                                        <a  class="btn btn-info btn-circle" href="./EditUsers.jsp?uid=<%= lista.getListUser().get(i).getUid()%>"><i class="fa fa-check"></i>
                                         </a>
-                                        <a  class="btn btn-warning btn-circle" href=""><i class="fa fa-times"></i>
+                                        <a  class="btn btn-danger btn-circle" href="./DeleteUsers.jsp?uid=<%= lista.getListUser().get(i).getUid()%>"><i class="fa fa-times"></i>
                                         </a>
                                     </td>
                                 </tr>
-                                <% }%>
+                                <% }
+                                    }%>
                             </tbody>
                         </table>
                     </div>
@@ -136,6 +154,11 @@
         <!-- /.col-lg-12 -->
     </div>
 </div>
+<%
+    if (session.getAttribute("alert") != null || session.getAttribute("alert-sucess") != null) {
+        session.removeAttribute("alert");
+        session.removeAttribute("alert-sucess");
+    }
+%>
 <!-- /#page-wrapper -->
-
 <%@include file="AdminFooter.jsp"  %>

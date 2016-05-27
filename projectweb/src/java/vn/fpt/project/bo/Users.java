@@ -6,7 +6,9 @@
 package vn.fpt.project.bo;
 
 import java.sql.SQLException;
-import vn.fpt.project.dao.DBConnect;
+import java.util.*;
+import vn.fpt.project.bao.*;
+import vn.fpt.project.dao.*;
 
 /**
  *
@@ -19,6 +21,8 @@ public class Users {
     private String password;
     private int permission;
     private DBConnect DB;
+    private HashMap<Integer, Folder> listFolder;
+    private HashMap<Integer, Lesson> listLession;
 
     public Users(int uid, String username, String password, int permission) {
         this.uid = uid;
@@ -30,6 +34,22 @@ public class Users {
     public Users() {
         DB = new DBConnect();
         permission = 1;
+    }
+
+    public void setListFolder(HashMap<Integer, Folder> listFolder) {
+        this.listFolder = listFolder;
+    }
+
+    public void setListLession(HashMap<Integer, Lesson> listLession) {
+        this.listLession = listLession;
+    }
+
+    public HashMap<Integer, Folder> getListFolder() {
+        return listFolder;
+    }
+
+    public HashMap<Integer, Lesson> getListLession() {
+        return listLession;
     }
 
     public boolean isLoggin(String username, String password) {

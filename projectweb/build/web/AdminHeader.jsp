@@ -1,6 +1,6 @@
 <%@page import="vn.fpt.project.bao.*"%>
 <%@page import="vn.fpt.project.bo.*"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -24,16 +24,16 @@
           <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
     </head>
-    <body ng-app="">
+    <body ng-app="myappMo">
         <%
             if (session.getAttribute("admin") == null) {
                 response.sendRedirect("./LoginAdmin.jsp");
             }
-            ListUser list = new ListUser();
-             list. getListData();
+            ListUser lista = new ListUser();
+             
         %>
 
-        <div id="wrapper">
+        <div id="wrapper" ng-controller="MyController">
 
             <!-- Navigation -->
             <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
@@ -114,9 +114,6 @@
                                     <li>
                                         <a href="./AdminUser.jsp">Users</a>
                                     </li>
-                                    <li>
-                                        <a href="./AddNewUser.jsp">Add new User </a>
-                                    </li>
                                 </ul>
                                 <!-- /.nav-second-level -->
                             </li>
@@ -128,8 +125,14 @@
                                     <li>
                                         <a href="./AdminLession.jsp">Lession</a>
                                     </li>
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+                             <li>
+                                <a href="#"><i class="fa fa-wrench fa-fw"></i> Folder <span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
                                     <li>
-                                        <a href="./AddNewLesson.jsp">Add new lession</a>
+                                        <a href="./AdminFolder.jsp">Folder</a>
                                     </li>
                                 </ul>
                                 <!-- /.nav-second-level -->

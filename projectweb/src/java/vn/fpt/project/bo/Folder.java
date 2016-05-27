@@ -5,6 +5,8 @@
  */
 package vn.fpt.project.bo;
 
+import vn.fpt.project.bao.*;
+
 /**
  *
  * @author MyPC
@@ -14,8 +16,10 @@ public class Folder {
     private String name;
     private int uid;
     private int sharefolder;
+    private ListLession listlession;
 
     public Folder() {
+        listlession = new ListLession();
         sharefolder = 1;
     }
 

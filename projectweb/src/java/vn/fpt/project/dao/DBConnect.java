@@ -78,12 +78,29 @@ public class DBConnect {
         try {
             String insertTableSQL = "INSERT INTO " + table + " "
                     + "(username,password,permission) VALUES"
-                    + "(?,?,?)";
+                    + "(N?,?,?)";
             PreparedStatement preparedStatement;
             preparedStatement = connect.prepareStatement(insertTableSQL);
             preparedStatement.setString(1, username);
             preparedStatement.setString(2, password);
             preparedStatement.setInt(3, permisson);
+            preparedStatement.executeUpdate();
+        } catch (SQLException ex) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean InsertFolder(String table, String name, int uid, int sharefolder) {
+        try {
+            String insertTableSQL = "INSERT INTO " + table + " "
+                    + "(username,password,permission) VALUES"
+                    + "(N?,?,?)";
+            PreparedStatement preparedStatement;
+            preparedStatement = connect.prepareStatement(insertTableSQL);
+            preparedStatement.setString(1, name);
+            preparedStatement.setInt(2, uid);
+            preparedStatement.setInt(3, sharefolder);
             preparedStatement.executeUpdate();
         } catch (SQLException ex) {
             return false;
@@ -156,14 +173,41 @@ public class DBConnect {
         }
     }
 
-    public static void main(String[] args) {
-        DBConnect DB = new DBConnect();
+    public boolean Update(String table, String set, String where) {
         try {
-            int count = DB.toCountTable(DB.TABLE_USERS, "username = 'Hoanguyen'"); 
-            System.out.println(count);
+            Statement stmt;
+            stmt = connect.createStatement();
+            String sql = "UPDATE " + table
+                    + " SET " + set + " WHERE " + where;
+            System.out.println(sql);
+            stmt.executeUpdate(sql);
         } catch (SQLException ex) {
-        } finally {
-            DB.toCloseData();
+            return false;
+        }
+        return true;
+    }
+
+    public boolean delete(String fied, String table) {
+        ResultSet rs;
+        Statement st;
+        try {
+            String sql = "delete from " + table + " where " + fied;
+            st = connect.createStatement();
+            st.execute(sql);
+            return true;
+        } catch (SQLException ex) {
+            return false;
         }
     }
+
+//    public static void main(String[] args) {
+//        DBConnect DB = new DBConnect();
+//        try {
+//            int count = DB.toCountTable(DB.TABLE_USERS, "username = 'Hoanguyen'");
+//            System.out.println(count);
+//        } catch (SQLException ex) {
+//        } finally {
+//            DB.toCloseData();
+//        }
+//    }
 }

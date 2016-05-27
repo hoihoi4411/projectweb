@@ -11,7 +11,7 @@
 <!-- DataTables JavaScript -->
 <script src="./style/js/jquery.dataTables.min.js"></script>
 <script src="./style/js/dataTables.bootstrap.min.js"></script>
-    <script src="./style/js/angular.min.js"></script>
+<script src="./style/js/angular_style.js"></script>
  <script>
     $(document).ready(function() {
         $('#dataTables-example').DataTable({
