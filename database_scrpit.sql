@@ -14,8 +14,8 @@ CREATE TABLE Pro_Lesson(
 );
 CREATE TABLE Pro_Quiz(
 	qid int IDENTITY(1,1) PRIMARY KEY NOT NULL,
-	question  text NOT NULL,
-	answer  text NOT NULL,
+	question  nvarchar(max) NOT NULL,
+	answer  nvarchar(max) NOT NULL,
 	lid int NOT NULL,
 );
 CREATE TABLE Pro_Folder(
