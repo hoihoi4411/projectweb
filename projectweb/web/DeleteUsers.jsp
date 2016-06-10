@@ -1,12 +1,14 @@
 <%@include file="AdminHeader.jsp"  %>
 <%  Users user = null;
     if (request.getParameter("uid") == null) {
+          session.removeAttribute("alert");
         session.setAttribute("alert", "Invalid Users !");
         response.sendRedirect("./AdminUser.jsp");
     } else {
         lista.getListData();
         user = lista.SearchUser(Integer.parseInt(request.getParameter("uid")));
         if (user == null) {
+              session.removeAttribute("alert");
             session.setAttribute("alert", "Uid is not have in Database !");
             response.sendRedirect("./AdminUser.jsp");
         }
@@ -14,15 +16,6 @@
     }
     int uid = Integer.parseInt(request.getParameter("uid"));
     String errors = "";
-
-    if (session.getAttribute("token") == null) {
-        String token = Hash.generateToken();
-        session.setAttribute("token", token);
-    } else {
-        String token = Hash.generateToken();
-    }
-
-  
     if (request.getParameter("token") != null && request.getParameter("token").equals(session.getAttribute("token"))) {
         session.removeAttribute("token");
         if (request.getParameter("canncel") != null) {
@@ -54,7 +47,7 @@
                 <div class="panel-body">
                     <form action="" method="POST" >
                         <p>Do you want to delete this <%= user.getUsername()%> ? </p>
-                        <input type="hidden" value="<%= session.getAttribute("token") %>" name="token">
+                       <input type="hidden" value="<%  session.setAttribute("token", Hash.generateToken()); out.print(session.getAttribute("token")); %>" name="token">
                         <input type="submit" class="btn btn-success" value="Ok" name="ok"/>
 
                     </form>

@@ -58,4 +58,9 @@ public class Quiz {
         this.lid = lid;
     }
 
+    @Override
+    public String toString() {
+        return qid + "" + answer+ question + lid;
+    }
+    
 }

@@ -7,6 +7,7 @@ package vn.fpt.project.bao;
 
 import java.util.*;
 import vn.fpt.project.bo.*;
+import vn.fpt.project.dao.DBConnect;
 
 /**
  *
@@ -14,9 +15,12 @@ import vn.fpt.project.bo.*;
  */
 public class ListQuiz {
 
-    HashMap<Integer, Quiz> listQuiz;
+    private HashMap<Integer, Quiz> listQuiz;
+    private DBConnect DB;
 
     public ListQuiz() {
+        DB = new DBConnect();
+        listQuiz = new HashMap<>();
     }
 
     public ListQuiz(HashMap<Integer, Quiz> listQuiz) {
@@ -31,6 +35,11 @@ public class ListQuiz {
         return listQuiz;
     }
 
-    
+    public boolean addNewListQuiz(ArrayList<Quiz> input, String lid) {
+        return DB.InSertDataQuiz(input, lid);
+    }
+    public boolean UpdateListQuiz(ArrayList<Quiz> input, String lid){
+        return DB.UpdateDataQuiz(input, lid);
+    }
 
 }

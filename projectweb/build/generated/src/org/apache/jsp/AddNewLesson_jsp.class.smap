@@ -1,0 +1,37 @@
+SMAP
+AddNewLesson_jsp.java
+JSP
+*S JSP
+*F
++ 0 AddNewLesson.jsp
+AddNewLesson.jsp
++ 1 AdminHeader.jsp
+AdminHeader.jsp
++ 2 AdminFooter.jsp
+AdminFooter.jsp
+*L
+1,2:54
+1#1,30:56
+31,12:87
+42,24:99
+66:123,3
+67,65:126
+3#0,4:191
+6,47:194
+52,12:241
+63,2:253
+64,3:255
+67:258,3
+68:261
+69:262,3
+70,35:265
+104,3:300
+106,2:303
+108:305,6
+109:311
+110:313,2
+111,21:315
+131,2:336
+132,53:338
+1#2,25:390
+*E

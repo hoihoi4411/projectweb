@@ -95,7 +95,13 @@ public class Users {
     }
 
     public void setPermission(int permission) {
+
         this.permission = permission;
+    }
+
+    @Override
+    public String toString() {
+        return uid + "|" + getUsername() + "|" + getPermission();
     }
 
 }

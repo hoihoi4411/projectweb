@@ -7,8 +7,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Admin Control Panel</title>
         <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="./style/css/bootstrap.min.css">
 
+        <link rel="stylesheet" href="./style/css/bootstrap.min.css" >
         <!-- Optional theme -->
         <link rel="stylesheet" href="./style/css/bootstrap-theme.min.css" >
 
@@ -17,6 +17,8 @@
         <link href="./style/css/font-awesome.min.css" rel="stylesheet" type="text/css">
         <!-- DataTables CSS -->
         <link href="./style/css/dataTables.bootstrap.css" rel="stylesheet">
+        
+        <script src="./style/js/angular.min.js"></script>
 
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
@@ -24,19 +26,25 @@
           <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
     </head>
-    <body ng-app="myappMo">
+    <body >
         <%
             if (session.getAttribute("admin") == null) {
-                response.sendRedirect("./LoginAdmin.jsp");
+                try {
+                    response.sendRedirect("./LoginAdmin.jsp");
+                    
+                } catch (Exception ex) {
+
+                }
+                return;
             }
             ListUser lista = new ListUser();
-             
+
         %>
 
-        <div id="wrapper" ng-controller="MyController">
+        <div id="wrapper" >
 
             <!-- Navigation -->
-            <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <nav class="navbar navbar-inverse navbar-static-top" role="navigation" style="margin-bottom: 0">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                         <span class="sr-only">Điều hướng</span>
@@ -44,7 +52,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="index.html">Admin Control Panel</a>
+                    <a class="navbar-brand" href="./Admin.jsp">Admin Control Panel</a>
                 </div>
                 <!-- /.navbar-header -->
 
@@ -52,34 +60,12 @@
                     <!-- /.dropdown -->
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-bell fa-fw"></i>  <i class="fa fa-caret-down"></i>
-                        </a>
-                        <ul class="dropdown-menu dropdown-user">
-                            <li>
-                                <a href="#">
-                                    <i class="fa fa-envelope fa-fw"></i> Tiếng Việt
-
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="#">
-                                    <i class="fa fa-tasks fa-fw"></i> Tiếng Anh
-                                </a>
-                            </li>
-
-                        </ul>
-                        <!-- /.dropdown-alerts -->
-                    </li>
-                    <!-- /.dropdown -->
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                             <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-user">
-                            <li><a href="#"><i class="fa fa-user fa-fw"></i> <%= session.getAttribute("admin")%> </a>
+                            <li><a href="#"><i class="fa fa-user fa-fw"></i> <% Users admin = (Users) session.getAttribute("admin"); out.print(admin.getUsername()); %> </a>
                             </li>
-                            <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                            <li><a href="./Index.jsp"><i class="fa fa-gear fa-fw"></i> Xem trang chủ</a>
                             </li>
                             <li class="divider"></li>
                             <li><a href="LogoutAdmin.jsp"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
@@ -96,7 +82,7 @@
                         <ul class="nav" id="side-menu">
                             <li class="sidebar-search">
                                 <div class="input-group custom-search-form">
-                                    <input type="text" class="form-control" placeholder="Search...">
+                                    <input type="text" class="form-control" placeholder="Tìm kiếm...">
                                     <span class="input-group-btn">
                                         <button class="btn btn-default" type="button">
                                             <i class="fa fa-search"></i>
@@ -106,13 +92,13 @@
                                 <!-- /input-group -->
                             </li>
                             <li>
-                                <a href="./Admin.jsp"><i class="fa fa-dashboard fa-fw"></i> Setting</a>
+                                <a href="./Admin.jsp"><i class="fa fa-dashboard fa-fw"></i> Trang chủ</a>
                             </li>
                             <li>
-                                <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Users <span class="fa arrow"></span></a>
+                                <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Thành viên <span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
-                                        <a href="./AdminUser.jsp">Users</a>
+                                        <a href="./AdminUser.jsp">Thành viên</a>
                                     </li>
                                 </ul>
                                 <!-- /.nav-second-level -->
@@ -120,19 +106,19 @@
 
 
                             <li>
-                                <a href="#"><i class="fa fa-wrench fa-fw"></i> Lession <span class="fa arrow"></span></a>
+                                <a href="#"><i class="fa fa-wrench fa-fw"></i> Bài học <span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
-                                        <a href="./AdminLession.jsp">Lession</a>
+                                        <a href="./AdminLession.jsp">Bài học</a>
                                     </li>
                                 </ul>
                                 <!-- /.nav-second-level -->
                             </li>
-                             <li>
-                                <a href="#"><i class="fa fa-wrench fa-fw"></i> Folder <span class="fa arrow"></span></a>
+                            <li>
+                                <a href="#"><i class="fa fa-wrench fa-fw"></i> Thư mục <span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
-                                        <a href="./AdminFolder.jsp">Folder</a>
+                                        <a href="./AdminFolder.jsp">Thư mục</a>
                                     </li>
                                 </ul>
                                 <!-- /.nav-second-level -->

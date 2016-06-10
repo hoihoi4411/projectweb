@@ -51,6 +51,13 @@ public class Validation {
         showErrors += name + " must be letter or number <br>";
         return false;
     }
+     public boolean StringFormatOnlyLetterAndDigitsAndBackSpace(String input, int minlenght, int maxlenght, String name) {
+        if (input.matches("^[\\w\\s]{" + minlenght + "," + maxlenght + "}$")) {
+            return true;
+        }
+        showErrors += name + " must be letter or number <br>";
+        return false;
+    }
 
     public boolean isEmpltyOrNull(String input, String name) {
         if (input == null) {

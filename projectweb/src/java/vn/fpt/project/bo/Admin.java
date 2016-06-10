@@ -34,4 +34,8 @@ public class Admin extends Users {
         }
         return false;
     }
+//    public static void main(String[] args) {
+//        Admin a = new Admin();
+//        System.out.println(a.isAdmin("hoatran", "hoatran"));
+//    }
 }

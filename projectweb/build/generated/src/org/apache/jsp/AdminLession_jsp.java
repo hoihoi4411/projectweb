@@ -3,6 +3,7 @@ package org.apache.jsp;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
+import java.util.*;
 import vn.fpt.project.bao.*;
 import vn.fpt.project.bo.*;
 
@@ -49,6 +50,7 @@ public final class AdminLession_jsp extends org.apache.jasper.runtime.HttpJspBas
       _jspx_out = out;
       _jspx_resourceInjector = (org.glassfish.jsp.api.ResourceInjector) application.getAttribute("com.sun.appserv.jsp.resource.injector");
 
+      out.write('\n');
       out.write("\n");
       out.write("\n");
       out.write("\n");
@@ -58,8 +60,8 @@ public final class AdminLession_jsp extends org.apache.jasper.runtime.HttpJspBas
       out.write("        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n");
       out.write("        <title>Admin Control Panel</title>\n");
       out.write("        <!-- Latest compiled and minified CSS -->\n");
-      out.write("        <link rel=\"stylesheet\" href=\"./style/css/bootstrap.min.css\">\n");
-      out.write("\n");
+      out.write("       \n");
+      out.write("        <link rel=\"stylesheet\" href=\"./style/css/bootstrap.min.css\" >\n");
       out.write("        <!-- Optional theme -->\n");
       out.write("        <link rel=\"stylesheet\" href=\"./style/css/bootstrap-theme.min.css\" >\n");
       out.write("\n");
@@ -79,17 +81,23 @@ public final class AdminLession_jsp extends org.apache.jasper.runtime.HttpJspBas
       out.write("        ");
 
             if (session.getAttribute("admin") == null) {
-                response.sendRedirect("./LoginAdmin.jsp");
+                try {
+                    response.sendRedirect("./LoginAdmin.jsp");
+
+                } catch (Exception ex) {
+
+                }
+
             }
             ListUser lista = new ListUser();
-             
+
         
       out.write("\n");
       out.write("\n");
       out.write("        <div id=\"wrapper\" ng-controller=\"MyController\">\n");
-      out.write("\n");
+      out.write("            \n");
       out.write("            <!-- Navigation -->\n");
-      out.write("            <nav class=\"navbar navbar-default navbar-static-top\" role=\"navigation\" style=\"margin-bottom: 0\">\n");
+      out.write("            <nav class=\"navbar navbar-inverse navbar-static-top\" role=\"navigation\" style=\"margin-bottom: 0\">\n");
       out.write("                <div class=\"navbar-header\">\n");
       out.write("                    <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\".navbar-collapse\">\n");
       out.write("                        <span class=\"sr-only\">Điều hướng</span>\n");
@@ -105,28 +113,6 @@ public final class AdminLession_jsp extends org.apache.jasper.runtime.HttpJspBas
       out.write("                    <!-- /.dropdown -->\n");
       out.write("                    <li class=\"dropdown\">\n");
       out.write("                        <a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\">\n");
-      out.write("                            <i class=\"fa fa-bell fa-fw\"></i>  <i class=\"fa fa-caret-down\"></i>\n");
-      out.write("                        </a>\n");
-      out.write("                        <ul class=\"dropdown-menu dropdown-user\">\n");
-      out.write("                            <li>\n");
-      out.write("                                <a href=\"#\">\n");
-      out.write("                                    <i class=\"fa fa-envelope fa-fw\"></i> Tiếng Việt\n");
-      out.write("\n");
-      out.write("                                </a>\n");
-      out.write("                            </li>\n");
-      out.write("                            <li class=\"divider\"></li>\n");
-      out.write("                            <li>\n");
-      out.write("                                <a href=\"#\">\n");
-      out.write("                                    <i class=\"fa fa-tasks fa-fw\"></i> Tiếng Anh\n");
-      out.write("                                </a>\n");
-      out.write("                            </li>\n");
-      out.write("\n");
-      out.write("                        </ul>\n");
-      out.write("                        <!-- /.dropdown-alerts -->\n");
-      out.write("                    </li>\n");
-      out.write("                    <!-- /.dropdown -->\n");
-      out.write("                    <li class=\"dropdown\">\n");
-      out.write("                        <a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\">\n");
       out.write("                            <i class=\"fa fa-user fa-fw\"></i>  <i class=\"fa fa-caret-down\"></i>\n");
       out.write("                        </a>\n");
       out.write("                        <ul class=\"dropdown-menu dropdown-user\">\n");
@@ -134,7 +120,7 @@ public final class AdminLession_jsp extends org.apache.jasper.runtime.HttpJspBas
       out.print( session.getAttribute("admin"));
       out.write(" </a>\n");
       out.write("                            </li>\n");
-      out.write("                            <li><a href=\"#\"><i class=\"fa fa-gear fa-fw\"></i> Settings</a>\n");
+      out.write("                            <li><a href=\"./Index.jsp\"><i class=\"fa fa-gear fa-fw\"></i> Back To Stite</a>\n");
       out.write("                            </li>\n");
       out.write("                            <li class=\"divider\"></li>\n");
       out.write("                            <li><a href=\"LogoutAdmin.jsp\"><i class=\"fa fa-sign-out fa-fw\"></i> Logout</a>\n");
@@ -183,7 +169,7 @@ public final class AdminLession_jsp extends org.apache.jasper.runtime.HttpJspBas
       out.write("                                </ul>\n");
       out.write("                                <!-- /.nav-second-level -->\n");
       out.write("                            </li>\n");
-      out.write("                             <li>\n");
+      out.write("                            <li>\n");
       out.write("                                <a href=\"#\"><i class=\"fa fa-wrench fa-fw\"></i> Folder <span class=\"fa arrow\"></span></a>\n");
       out.write("                                <ul class=\"nav nav-second-level\">\n");
       out.write("                                    <li>\n");
@@ -198,18 +184,100 @@ public final class AdminLession_jsp extends org.apache.jasper.runtime.HttpJspBas
       out.write("                </div>\n");
       out.write("                <!-- /.navbar-static-side -->\n");
       out.write("            </nav>");
-      out.write("\n");
+      out.write('\n');
+    ListLession listLession = new ListLession();
+    listLession.getData();
+    HashMap<Integer, Lesson> list = listLession.getListLession();
+
+
       out.write("\n");
       out.write("\n");
       out.write("<div id=\"page-wrapper\">\n");
       out.write("    <div class=\"row\">\n");
       out.write("        <div class=\"col-lg-12\">\n");
+      out.write("            ");
+                if (session.getAttribute("alert") != null) {
+                    session.removeAttribute("alert-sucess");
+      out.write("\n");
+      out.write("            <div class=\"alert alert-danger alert-dismissable\">\n");
+      out.write("                <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">×</button>\n");
+      out.write("                ");
+      out.print( session.getAttribute("alert"));
+      out.write("\n");
+      out.write("            </div>\n");
+      out.write("            ");
+}
+      out.write("\n");
+      out.write("            ");
+
+                if (session.getAttribute("alert-sucess") != null) {
+                    session.removeAttribute("alert");
+      out.write("\n");
+      out.write("            <div class=\"alert alert-success alert-dismissable\">\n");
+      out.write("                <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">×</button>\n");
+      out.write("                ");
+      out.print( session.getAttribute("alert-sucess"));
+      out.write("\n");
+      out.write("            </div>\n");
+      out.write("            ");
+}
+      out.write("\n");
       out.write("            <h1 class=\"page-header\">Lession </h1>\n");
+      out.write("            <div class=\"dataTable_wrapper\">\n");
+      out.write("                <table class=\"table table-striped table-bordered table-hover\" id=\"dataTables-example\">\n");
+      out.write("                    <thead>\n");
+      out.write("                        <tr>\n");
+      out.write("                            <th>#</th>\n");
+      out.write("                            <th>Title</th>\n");
+      out.write("                            <th>Author</th>\n");
+      out.write("                            <th>Share</th>\n");
+      out.write("                            <th>Action</th>\n");
+      out.write("                        </tr>\n");
+      out.write("                    </thead>\n");
+      out.write("                    <tbody>\n");
+      out.write("                        ");
+   for (Map.Entry<Integer, Lesson> entry : list.entrySet()) {
+                                Integer key = entry.getKey();
+                                Lesson value = entry.getValue();
+      out.write("\n");
+      out.write("                        <tr>\n");
+      out.write("                            <td> ");
+      out.print( key );
+      out.write("</td>\n");
+      out.write("                            <td><a href=\"./AdminLessionPage.jsp?lid=");
+      out.print( key);
+      out.write('"');
+      out.write('>');
+      out.print( value.getTitle() );
+      out.write("</a></td>\n");
+      out.write("                            <td>");
+      out.print( value.getUid() );
+      out.write("</td>\n");
+      out.write("                            <td>");
+      out.print( value.getShare() );
+      out.write("</td>\n");
+      out.write("                            <td class=\"center\">\n");
+      out.write("                                    <a  class=\"btn btn-info btn-circle\" href=\"./AdminEditLession.jsp?lid=");
+      out.print( key);
+      out.write("\"><i class=\"fa fa-check\"></i>\n");
+      out.write("                                    </a>\n");
+      out.write("                                    <a  class=\"btn btn-danger btn-circle\" href=\"./AdminDeleteLession.jsp?lid=");
+      out.print( key);
+      out.write("\"><i class=\"fa fa-times\"></i>\n");
+      out.write("                                    </a>\n");
+      out.write("                                </td>\n");
+      out.write("                        </tr>\n");
+      out.write("                        ");
+ }
+      out.write("\n");
+      out.write("                    </tbody>\n");
+      out.write("                </table>\n");
+      out.write("            </div>\n");
       out.write("        </div>\n");
       out.write("        <!-- /.col-lg-12 -->\n");
       out.write("    </div>\n");
       out.write("    <div class=\"row\">\n");
-      out.write("       \n");
+      out.write("\n");
       out.write("    </div>\n");
       out.write("</div>\n");
       out.write("<!-- /#page-wrapper -->\n");

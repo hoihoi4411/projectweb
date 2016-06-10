@@ -100,11 +100,29 @@ public class ListUser {
 
     public Users SearchUser(int uid) {
         for (int i = 0; i < listUser.size(); i++) {
-            if (listUser.get(i).getUid() == uid && listUser.get(i).getPermission() != 1) {
+            if (listUser.get(i).getUid() == uid ) {
                 return listUser.get(i);
             }
         }
         return null;
+    }
+
+    public boolean SearchUser(String username) {
+        for (int i = 0; i < listUser.size(); i++) {
+            if (listUser.get(i).getUsername().equals(username)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public int GetUserID(String username) {
+        for (int i = 0; i < listUser.size(); i++) {
+            if (listUser.get(i).getUsername().equals(username)) {
+                return listUser.get(i).getUid();
+            }
+        }
+        return -1;
     }
 
     public boolean UpdateUser(String username, String password, String permission, int uid) {
@@ -146,7 +164,7 @@ public class ListUser {
 
     public boolean deleteUser(int uid) {
         for (int i = 0; i < listUser.size(); i++) {
-            if (listUser.get(i).getUid() == uid) {
+            if (listUser.get(i).getUid() == uid && listUser.get(i).getPermission()!= 1) {
                 String fied = DB.FIELD_TABLE_USERS[0] + " = " + uid;
                 return DB.delete(fied, DB.TABLE_USERS);
             }
@@ -156,28 +174,10 @@ public class ListUser {
 
     public static void main(String[] args) {
         ListUser list = new ListUser();
-        DBConnect DB = new DBConnect();
         list.getListData();
-//        for (int i = 0; i < list.listUser.size(); i++) {
-//            HashMap<Integer, Lesson> listAUser = new HashMap<>();
-//            try {
-//                ResultSet result = DB.selectQuery(DB.TABLE_LESSON, "uid = " + list.listUser.get(i).getUid());
-//                Users newUs = list.listUser.get(i);
-//                while (result.next()) {
-//                    int fid = result.getInt(DB.FIELD_TABLE_LESSON[0]);
-//                    String name = result.getNString(DB.FIELD_TABLE_LESSON[1]);
-//                    int uid = result.getInt(DB.FIELD_TABLE_LESSON[2]);
-//                    int share = result.getInt(DB.FIELD_TABLE_LESSON[3]);
-//                    listAUser.put(fid, new Lesson(fid, name, uid, share));
-//
-//                }
-//                list.listUser.get(i).setListLession(listAUser);
-//            } catch (SQLException ex) {
-//
-//            }
-//        }
-        System.out.println(list.listUser.get(2).getListFolder());
-        System.out.println(list.listUser.get(1).getUid());
+        Users newAdd = list.SearchUser(2);
+        System.out.println(newAdd.getListLession());
+
     }
 
 }

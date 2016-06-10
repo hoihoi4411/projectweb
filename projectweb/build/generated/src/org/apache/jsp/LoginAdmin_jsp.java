@@ -61,16 +61,14 @@ public final class LoginAdmin_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        <![endif]-->\r\n");
       out.write("        <link rel=\"stylesheet\" href=\"./style/css/style.css\" >\r\n");
       out.write("    </head>\r\n");
-      out.write("    <body ng-app=\"\">\r\n");
+      out.write("    <body>\r\n");
       out.write("        ");
 
+            String errors = "";
             if (session.getAttribute("admin") != null) {
                 response.sendRedirect("./Admin.jsp");
             }
-            String token = Hash.generateToken();
-            session.setAttribute("token", token);
-            String errors = "";
-            if (request.getParameter("token") != session.getAttribute(token)) {
+            if (request.getParameter("token") != null && request.getParameter("token").equals(session.getAttribute("token"))) {
                 session.removeAttribute("token");
                 Admin user = new Admin();
                 Validation validation = new Validation();
@@ -83,6 +81,7 @@ public final class LoginAdmin_jsp extends org.apache.jasper.runtime.HttpJspBase
                         session.setAttribute("user", request.getParameter("username"));
                         response.sendRedirect("./Admin.jsp");
                     } else {
+                        
                         errors = "You Not Admin";
                     }
                 } else {
@@ -90,6 +89,7 @@ public final class LoginAdmin_jsp extends org.apache.jasper.runtime.HttpJspBase
                 }
 
             }
+
         
       out.write("\r\n");
       out.write("        <div class=\"container\">\r\n");
@@ -118,28 +118,23 @@ public final class LoginAdmin_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\r\n");
       out.write("                        <div class=\"input-group\">\r\n");
       out.write("                            <span class=\"input-group-addon\"><i class=\"glyphicon glyphicon-user\"></i></span>\r\n");
-      out.write("                            <input id=\"user\" type=\"text\" class=\"form-control\"  value=\"\" placeholder=\"User\" ng-model=\"username\" name=\"username\" required autofocus>  \r\n");
-      out.write("                          \r\n");
+      out.write("                            <input id=\"user\" type=\"text\" class=\"form-control\"  value=\"\" placeholder=\"User\" name=\"username\">  \r\n");
+      out.write("\r\n");
       out.write("                        </div>\r\n");
-      out.write("                          <span ng-show=\"myForm.username.$touched && myForm.username.$invalid\" class=\"label label-danger\">The username is required.</span>\r\n");
-      out.write("\r\n");
-      out.write("\r\n");
       out.write("                        <div class=\"input-group\">\r\n");
       out.write("                            <span class=\"input-group-addon\"><i class=\"glyphicon glyphicon-lock\"></i></span>\r\n");
-      out.write("                            <input id=\"password\" type=\"password\" class=\"form-control\"  placeholder=\"Password\" name=\"password\" ng-model=\"password\" required>\r\n");
-      out.write("                           \r\n");
-      out.write("                        </div>\r\n");
-      out.write("                           <span ng-show=\"myForm.password.$touched && myForm.password.$invalid\" class=\"label label-danger\">The password is required.</span>\r\n");
+      out.write("                            <input id=\"password\" type=\"password\" class=\"form-control\"  placeholder=\"Password\" name=\"password\">\r\n");
       out.write("\r\n");
+      out.write("                        </div>\r\n");
       out.write("                        <div class=\"input-group\">\r\n");
       out.write("                            <input type=\"hidden\" value=\"");
-      out.print( token);
+  session.setAttribute("token", Hash.generateToken()); out.print(session.getAttribute("token")); 
       out.write("\" name=\"token\">\r\n");
       out.write("                        </div>\r\n");
       out.write("                        <div class=\"form-group\">\r\n");
       out.write("                            <!-- Button -->\r\n");
       out.write("                            <div class=\"col-sm-12 controls\">\r\n");
-      out.write("                                <input type=\"submit\" class=\"btn btn-primary pull-right\" name=\"submit\" value=\"Log in\">                        \r\n");
+      out.write("                                <input type=\"submit\" class=\"btn btn-primary pull-right\" name=\"submit\" value=\"Login\">                        \r\n");
       out.write("                            </div>\r\n");
       out.write("                        </div>\r\n");
       out.write("\r\n");

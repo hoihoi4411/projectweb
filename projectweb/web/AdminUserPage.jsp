@@ -3,6 +3,7 @@
 <%@include file="AdminHeader.jsp"  %>
 
 <%  Users user = null;
+
     if (request.getParameter("uid") == null) {
         try {
             response.sendRedirect("./AdminUser.jsp");
@@ -27,9 +28,8 @@
         }
 
     }
-    for (Map.Entry<Integer, Folder> entry : user.getListFolder().entrySet()) {
-
-    }
+    ListFolder listFolder = new ListFolder();
+    listFolder.setListFolder(user.getListFolder());
 %>
 <div id="page-wrapper">
     <div class="row">
@@ -114,12 +114,90 @@
                     <div class="tab-content">
                         <%  i = 0;
                             for (Map.Entry<Integer, Folder> entry : user.getListFolder().entrySet()) {
+                                Integer key = entry.getKey();
                                 Folder value = entry.getValue();
                                 if (i == 0) {
                         %>
-                        <div role="tabpanel" class="tab-pane active" id="<%= value.getFid()%>">fdsf</div>
+                        <div role="tabpanel" class="tab-pane active" id="<%= value.getFid()%>">
+                            <table class="table table-striped table-hover ">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Lesson</th>
+                                        <th>Share</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <%
+                                        ArrayList<FolderJoinLessionJoinUsers> li = listFolder.getAllLessionInData(value.getFid() + "");
+                                        for (int j = 0; j < li.size(); j++) {
+                                    %>
+                                    <tr>
+                                        <td> <%= li.get(j).getLid()%></td>
+                                        <td><%= li.get(j).getTitle()%></td>
+                                        <td><% switch (li.get(j).getShare()) {
+                                                case 1:
+                                                    out.print("OnlyMe");
+                                                    break;
+                                                case 2:
+                                                    out.print("For User");
+                                                    break;
+                                                case 3:
+                                                    out.print("Public");
+                                                    break;
+                                            }%></td>
+                                        <td><a href=".\EditLession.jsp?lid= <%= li.get(j).getLid()%>" class="btn btn-info btn-circle"><i class="fa fa-check"></i>
+                                            </a><a href=".\DeleteLession.jsp?lid= <%= li.get(j).getLid()%>" class="btn btn-warning btn-circle"><i class="fa fa-times"></i>
+                                            </a></td>
+                                    </tr>
+                                    <% }%>
+                                </tbody>
+                            </table>
+
+
+                        </div>
                         <%  } else {%>
-                        <div role="tabpanel" class="tab-pane" id="<%= value.getFid()%>">xccz</div>
+                        <div role="tabpanel" class="tab-pane" id="<%= value.getFid()%>">
+
+                            <table class="table table-striped table-hover ">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Lesson</th>
+                                        <th>Share</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <%
+                                        ArrayList<FolderJoinLessionJoinUsers> li = listFolder.getAllLessionInData(value.getFid() + "");
+                                        for (int j = 0; j < li.size(); j++) {
+                                    %>
+                                    <tr>
+                                        <td> <%= li.get(j).getLid()%></td>
+                                        <td><%= li.get(j).getTitle()%></td>
+                                        <td><% switch (li.get(j).getShare()) {
+                                                case 1:
+                                                    out.print("OnlyMe");
+                                                    break;
+                                                case 2:
+                                                    out.print("For User");
+                                                    break;
+                                                case 3:
+                                                    out.print("Public");
+                                                    break;
+                                            }%></td>
+                                        
+                                        <td><a href=".\EditLession.jsp?lid= <%= li.get(j).getLid()%>" class="btn btn-info btn-circle"><i class="fa fa-check"></i>
+                                            </a><a href=".\DeleteLession.jsp?lid= <%= li.get(j).getLid()%>" class="btn btn-warning btn-circle"><i class="fa fa-times"></i>
+                                            </a></td>
+                                    </tr>
+                                    <% }%>
+                                </tbody>
+                            </table>
+
+                        </div>
                         <%  }
                                 i++;
                             }%>
@@ -152,10 +230,20 @@
                         <tr>
                             <td> <%= value.getLid()%></td>
                             <td><%= value.getTitle()%></td>
-                            <td><%= value.getShare()%></td>
+                            <td><% switch (value.getShare()) {
+                                    case 1:
+                                        out.print("OnlyMe");
+                                        break;
+                                    case 2:
+                                        out.print("For User");
+                                        break;
+                                    case 3:
+                                        out.print("Public");
+                                        break;
+                                }%></td>
                             <td><a href=".\EditLession.jsp?lid=<%= value.getLid()%>" class="btn btn-info btn-circle"><i class="fa fa-check"></i>
-                            </a><a href=".\DeleteLession.jsp?lid=<%= value.getLid()%>" class="btn btn-warning btn-circle"><i class="fa fa-times"></i>
-                            </a></td>
+                                </a><a href=".\DeleteLession.jsp?lid=<%= value.getLid()%>" class="btn btn-warning btn-circle"><i class="fa fa-times"></i>
+                                </a></td>
                         </tr>
                         <%  } %>
                         <% }%>

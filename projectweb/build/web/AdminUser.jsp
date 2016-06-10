@@ -2,12 +2,7 @@
 <%    String errors = "";
     lista.getListData();
 
-    if (session.getAttribute("token") == null) {
-        String token = Hash.generateToken();
-        session.setAttribute("token", token);
-    } else {
-        String token = Hash.generateToken();
-    }
+   
     if (request.getParameter("token") != null && request.getParameter("token").equals(session.getAttribute("token"))) {
         session.removeAttribute("token");
         Validation validation = new Validation();
@@ -59,14 +54,14 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">Add new User</h3>
                 </div>
-                <form action="" method="POST"  name="AddnewForm" >
+                <form action="" method="POST">
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Username : </label>
-                                    <input class="form-control" type="text" name="username"  placeholder="Enter here Username" ng-model="username" required autocomplete="off">
-                                    <p ng-show="AddnewForm.username.$touched && AddnewForm.username.$invalid" class="label label-danger">Username is required</p>
+                                    <input class="form-control" type="text" name="username"  placeholder="Enter here Username"  >
+                                 
                                 </div>
                                 <div class="form-group">
                                     <label>Selects</label>
@@ -79,12 +74,12 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Password : </label>
-                                    <input class="form-control" type="password" placeholder="Enter Password Here" name="password" ng-model="password" required autocomplete="off">
-                                    <p ng-show="AddnewForm.password.$touched && AddnewForm.password.$invalid" class="label label-danger">Password is required</p>
+                                    <input class="form-control" type="password" placeholder="Enter Password Here" name="password"  >
                                 </div>
-                                <input type="hidden" value="<%= session.getAttribute("token")%>" name="token">
+                               <input type="hidden" value="<%  session.setAttribute("token", Hash.generateToken());
+     out.print(session.getAttribute("token"));%>" name="token">
                                 <div class="form-group">
-                                    <input type="submit" class="btn btn-default" value="Add new user">
+                                    <input type="submit" class="btn btn-default" value="Add new user" name="submit">
                                     <input type="reset" class="btn btn-default" value="Reset">
                                 </div>
                             </div>

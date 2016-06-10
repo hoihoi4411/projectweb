@@ -58,8 +58,8 @@ public final class AdminUser_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n");
       out.write("        <title>Admin Control Panel</title>\n");
       out.write("        <!-- Latest compiled and minified CSS -->\n");
-      out.write("        <link rel=\"stylesheet\" href=\"./style/css/bootstrap.min.css\">\n");
       out.write("\n");
+      out.write("        <link rel=\"stylesheet\" href=\"./style/css/bootstrap.min.css\" >\n");
       out.write("        <!-- Optional theme -->\n");
       out.write("        <link rel=\"stylesheet\" href=\"./style/css/bootstrap-theme.min.css\" >\n");
       out.write("\n");
@@ -68,6 +68,8 @@ public final class AdminUser_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        <link href=\"./style/css/font-awesome.min.css\" rel=\"stylesheet\" type=\"text/css\">\n");
       out.write("        <!-- DataTables CSS -->\n");
       out.write("        <link href=\"./style/css/dataTables.bootstrap.css\" rel=\"stylesheet\">\n");
+      out.write("        <script src=\"./style/js/angular.min.js\"></script>\n");
+      out.write("\n");
       out.write("\n");
       out.write("        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->\n");
       out.write("        <!--[if lt IE 9]>\n");
@@ -79,17 +81,23 @@ public final class AdminUser_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        ");
 
             if (session.getAttribute("admin") == null) {
-                response.sendRedirect("./LoginAdmin.jsp");
+                try {
+                    response.sendRedirect("./LoginAdmin.jsp");
+
+                } catch (Exception ex) {
+
+                }
+
             }
             ListUser lista = new ListUser();
-             
+
         
       out.write("\n");
       out.write("\n");
       out.write("        <div id=\"wrapper\" ng-controller=\"MyController\">\n");
       out.write("\n");
       out.write("            <!-- Navigation -->\n");
-      out.write("            <nav class=\"navbar navbar-default navbar-static-top\" role=\"navigation\" style=\"margin-bottom: 0\">\n");
+      out.write("            <nav class=\"navbar navbar-inverse navbar-static-top\" role=\"navigation\" style=\"margin-bottom: 0\">\n");
       out.write("                <div class=\"navbar-header\">\n");
       out.write("                    <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\".navbar-collapse\">\n");
       out.write("                        <span class=\"sr-only\">Điều hướng</span>\n");
@@ -97,33 +105,11 @@ public final class AdminUser_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                        <span class=\"icon-bar\"></span>\n");
       out.write("                        <span class=\"icon-bar\"></span>\n");
       out.write("                    </button>\n");
-      out.write("                    <a class=\"navbar-brand\" href=\"index.html\">Admin Control Panel</a>\n");
+      out.write("                    <a class=\"navbar-brand\" href=\"./Admin.jsp\">Admin Control Panel</a>\n");
       out.write("                </div>\n");
       out.write("                <!-- /.navbar-header -->\n");
       out.write("\n");
       out.write("                <ul class=\"nav navbar-top-links navbar-right\">\n");
-      out.write("                    <!-- /.dropdown -->\n");
-      out.write("                    <li class=\"dropdown\">\n");
-      out.write("                        <a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\">\n");
-      out.write("                            <i class=\"fa fa-bell fa-fw\"></i>  <i class=\"fa fa-caret-down\"></i>\n");
-      out.write("                        </a>\n");
-      out.write("                        <ul class=\"dropdown-menu dropdown-user\">\n");
-      out.write("                            <li>\n");
-      out.write("                                <a href=\"#\">\n");
-      out.write("                                    <i class=\"fa fa-envelope fa-fw\"></i> Tiếng Việt\n");
-      out.write("\n");
-      out.write("                                </a>\n");
-      out.write("                            </li>\n");
-      out.write("                            <li class=\"divider\"></li>\n");
-      out.write("                            <li>\n");
-      out.write("                                <a href=\"#\">\n");
-      out.write("                                    <i class=\"fa fa-tasks fa-fw\"></i> Tiếng Anh\n");
-      out.write("                                </a>\n");
-      out.write("                            </li>\n");
-      out.write("\n");
-      out.write("                        </ul>\n");
-      out.write("                        <!-- /.dropdown-alerts -->\n");
-      out.write("                    </li>\n");
       out.write("                    <!-- /.dropdown -->\n");
       out.write("                    <li class=\"dropdown\">\n");
       out.write("                        <a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\">\n");
@@ -134,7 +120,7 @@ public final class AdminUser_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.print( session.getAttribute("admin"));
       out.write(" </a>\n");
       out.write("                            </li>\n");
-      out.write("                            <li><a href=\"#\"><i class=\"fa fa-gear fa-fw\"></i> Settings</a>\n");
+      out.write("                            <li><a href=\"./Index.jsp\"><i class=\"fa fa-gear fa-fw\"></i> Xem trang chủ</a>\n");
       out.write("                            </li>\n");
       out.write("                            <li class=\"divider\"></li>\n");
       out.write("                            <li><a href=\"LogoutAdmin.jsp\"><i class=\"fa fa-sign-out fa-fw\"></i> Logout</a>\n");
@@ -151,7 +137,7 @@ public final class AdminUser_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                        <ul class=\"nav\" id=\"side-menu\">\n");
       out.write("                            <li class=\"sidebar-search\">\n");
       out.write("                                <div class=\"input-group custom-search-form\">\n");
-      out.write("                                    <input type=\"text\" class=\"form-control\" placeholder=\"Search...\">\n");
+      out.write("                                    <input type=\"text\" class=\"form-control\" placeholder=\"Tìm kiếm...\">\n");
       out.write("                                    <span class=\"input-group-btn\">\n");
       out.write("                                        <button class=\"btn btn-default\" type=\"button\">\n");
       out.write("                                            <i class=\"fa fa-search\"></i>\n");
@@ -161,13 +147,13 @@ public final class AdminUser_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                                <!-- /input-group -->\n");
       out.write("                            </li>\n");
       out.write("                            <li>\n");
-      out.write("                                <a href=\"./Admin.jsp\"><i class=\"fa fa-dashboard fa-fw\"></i> Setting</a>\n");
+      out.write("                                <a href=\"./Admin.jsp\"><i class=\"fa fa-dashboard fa-fw\"></i> Trang chủ</a>\n");
       out.write("                            </li>\n");
       out.write("                            <li>\n");
-      out.write("                                <a href=\"#\"><i class=\"fa fa-bar-chart-o fa-fw\"></i> Users <span class=\"fa arrow\"></span></a>\n");
+      out.write("                                <a href=\"#\"><i class=\"fa fa-bar-chart-o fa-fw\"></i> Thành viên <span class=\"fa arrow\"></span></a>\n");
       out.write("                                <ul class=\"nav nav-second-level\">\n");
       out.write("                                    <li>\n");
-      out.write("                                        <a href=\"./AdminUser.jsp\">Users</a>\n");
+      out.write("                                        <a href=\"./AdminUser.jsp\">Thành viên</a>\n");
       out.write("                                    </li>\n");
       out.write("                                </ul>\n");
       out.write("                                <!-- /.nav-second-level -->\n");
@@ -175,19 +161,19 @@ public final class AdminUser_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\n");
       out.write("\n");
       out.write("                            <li>\n");
-      out.write("                                <a href=\"#\"><i class=\"fa fa-wrench fa-fw\"></i> Lession <span class=\"fa arrow\"></span></a>\n");
+      out.write("                                <a href=\"#\"><i class=\"fa fa-wrench fa-fw\"></i> Bài học <span class=\"fa arrow\"></span></a>\n");
       out.write("                                <ul class=\"nav nav-second-level\">\n");
       out.write("                                    <li>\n");
-      out.write("                                        <a href=\"./AdminLession.jsp\">Lession</a>\n");
+      out.write("                                        <a href=\"./AdminLession.jsp\">Bài học</a>\n");
       out.write("                                    </li>\n");
       out.write("                                </ul>\n");
       out.write("                                <!-- /.nav-second-level -->\n");
       out.write("                            </li>\n");
-      out.write("                             <li>\n");
-      out.write("                                <a href=\"#\"><i class=\"fa fa-wrench fa-fw\"></i> Folder <span class=\"fa arrow\"></span></a>\n");
+      out.write("                            <li>\n");
+      out.write("                                <a href=\"#\"><i class=\"fa fa-wrench fa-fw\"></i> Thư mục <span class=\"fa arrow\"></span></a>\n");
       out.write("                                <ul class=\"nav nav-second-level\">\n");
       out.write("                                    <li>\n");
-      out.write("                                        <a href=\"./AdminFolder.jsp\">Folder</a>\n");
+      out.write("                                        <a href=\"./AdminFolder.jsp\">Thư mục</a>\n");
       out.write("                                    </li>\n");
       out.write("                                </ul>\n");
       out.write("                                <!-- /.nav-second-level -->\n");
@@ -202,12 +188,7 @@ public final class AdminUser_jsp extends org.apache.jasper.runtime.HttpJspBase
     String errors = "";
     lista.getListData();
 
-    if (session.getAttribute("token") == null) {
-        String token = Hash.generateToken();
-        session.setAttribute("token", token);
-    } else {
-        String token = Hash.generateToken();
-    }
+   
     if (request.getParameter("token") != null && request.getParameter("token").equals(session.getAttribute("token"))) {
         session.removeAttribute("token");
         Validation validation = new Validation();
@@ -295,8 +276,9 @@ public final class AdminUser_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                                    <input class=\"form-control\" type=\"password\" placeholder=\"Enter Password Here\" name=\"password\" ng-model=\"password\" required autocomplete=\"off\">\n");
       out.write("                                    <p ng-show=\"AddnewForm.password.$touched && AddnewForm.password.$invalid\" class=\"label label-danger\">Password is required</p>\n");
       out.write("                                </div>\n");
-      out.write("                                <input type=\"hidden\" value=\"");
-      out.print( session.getAttribute("token"));
+      out.write("                               <input type=\"hidden\" value=\"");
+  session.setAttribute("token", Hash.generateToken());
+     out.print(session.getAttribute("token"));
       out.write("\" name=\"token\">\n");
       out.write("                                <div class=\"form-group\">\n");
       out.write("                                    <input type=\"submit\" class=\"btn btn-default\" value=\"Add new user\">\n");
@@ -402,7 +384,7 @@ public final class AdminUser_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("<!-- Custom Theme JavaScript -->\n");
       out.write("<script src=\"./style/js/sb-admin-2.js\"></script>\n");
       out.write("<script src=\"./style/js/bootstrap.min.js\"></script>\n");
-      out.write("<script src=\"./style/js/angular.min.js\"></script>\n");
+      out.write("\n");
       out.write("\n");
       out.write("<!-- DataTables JavaScript -->\n");
       out.write("<script src=\"./style/js/jquery.dataTables.min.js\"></script>\n");

@@ -1,6 +1,7 @@
 <%@include file="AdminHeader.jsp"  %>
 <%    Users user = null;
     if (request.getParameter("uid") == null) {
+        session.removeAttribute("alert");
         session.setAttribute("alert", "Invalid Users !");
         response.sendRedirect("./AdminUser.jsp");
     } else {
@@ -10,13 +11,16 @@
             uid = Integer.parseInt(request.getParameter("uid"));
             user = lista.SearchUser(uid);
             if (user == null) {
+                session.removeAttribute("alert");
                 session.setAttribute("alert", "Uid is not have in Database !");
                 response.sendRedirect("./AdminUser.jsp");
             }
         } catch (Exception e) {
             if (session.getAttribute("alert") != null) {
                 session.removeAttribute("alert");
+                session.removeAttribute("alert");
             }
+            session.removeAttribute("alert");
             session.setAttribute("alert", "Uid is not invalid!");
             response.sendRedirect("./AdminUser.jsp");
         }
@@ -24,12 +28,6 @@
     }
     int uid = Integer.parseInt(request.getParameter("uid"));
     String errors = "";
-    if (session.getAttribute("token") == null) {
-        String token = Hash.generateToken();
-        session.setAttribute("token", token);
-    } else {
-        String token = Hash.generateToken();
-    }
     if (request.getParameter("token") != null && request.getParameter("token").equals(session.getAttribute("token"))) {
         session.removeAttribute("token");
         Validation validation = new Validation();
@@ -40,26 +38,32 @@
             if (validation.StringFormatOnlyLetterAndDigits(username, 5, 30, "username") && validation.NumberFormatMinMax(permission, 1, 2, "permission")) {
                 boolean resu = lista.UpdateUser(username, password, permission, uid);
                 if (resu) {
+                    session.removeAttribute("alert-sucess");
                     session.setAttribute("alert-sucess", "Update Users Successful!");
                     response.sendRedirect("./AdminUser.jsp");
                 } else {
+                    session.removeAttribute("alert");
                     errors = "Username exits in unique";
                     session.setAttribute("alert", errors);
                 }
             } else {
+                session.removeAttribute("alert");
                 errors = validation.getShowErrors();
                 session.setAttribute("alert", errors);
             }
         } else if (validation.StringFormatOnlyLetterAndDigits(username, 5, 30, "username") && validation.NumberFormatMinMax(permission, 1, 2, "permission")) {
             boolean resu = lista.UpdateUser(username, password, permission, uid);
             if (resu) {
+                session.removeAttribute("alert-sucess");
                 session.setAttribute("alert-sucess", "Update Users Successful!");
                 response.sendRedirect("./AdminUser.jsp");
             } else {
+                session.removeAttribute("alert");
                 errors = "Username exits in unique";
                 session.setAttribute("alert", errors);
             }
         } else {
+            session.removeAttribute("alert");
             errors = validation.getShowErrors();
             session.setAttribute("alert", errors);
         }
@@ -121,7 +125,8 @@
                                     <label>Password : </label>
                                     <input class="form-control" type="password" placeholder="Enter Password Here" name="password"  autocomplete="off">
                                 </div>
-                                <input type="hidden" value="<%= session.getAttribute("token")%>" name="token">
+                                <input type="hidden" value="<%  session.setAttribute("token", Hash.generateToken());
+                                     out.print(session.getAttribute("token"));%>" name="token">
                                 <div class="form-group">
                                     <input type="submit" class="btn btn-default" value="Add new user">
                                     <input type="reset" class="btn btn-default" value="Reset">
