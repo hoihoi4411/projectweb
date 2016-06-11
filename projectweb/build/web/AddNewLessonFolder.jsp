@@ -17,7 +17,7 @@
     String fid = request.getParameter("fid");
     if (request.getParameter("fid") == null || !request.getParameter("fid").matches("[0-9]{1,10}")) {
         try {
-            response.sendRedirect("./Index.jsp");
+            response.sendRedirect("./index.jsp");
             return;
         } catch (Exception ex) {
 

@@ -25,12 +25,12 @@
                     for (int i = 0; i < cookies.length; i++) {
                         cookie = cookies[i];
                         if (cookie.getName().equalsIgnoreCase("username")) {
-                            response.sendRedirect("./Index.jsp");
+                            response.sendRedirect("./index.jsp");
                         }
                     }
 
                 }else if (session.getAttribute("user") != null) {
-                    response.sendRedirect("./Index.jsp");
+                    response.sendRedirect("./index.jsp");
                 }
                 String errors = "";
                 String username = "";

@@ -32,7 +32,7 @@
     Users newAdd = null;
     Users UsersSession = null;
     if (session.getAttribute("user") == null && check == false) {
-        response.sendRedirect("./Index.jsp");
+        response.sendRedirect("./index.jsp");
         return;
     } else if (session.getAttribute("user") != null) {
         newAdd = (Users) session.getAttribute("user");
@@ -47,7 +47,7 @@
 <div class="container">
     <div class="col-lg-12">
         <ul class="breadcrumb">
-            <li><a href="./UsersPage.jsp">Home</a></li>
+            <li><a href="./index.jsp">Home</a></li>
             <li class="active"><% if (newAdd != null) {
                     out.print(newAdd.getUsername());
                 } %></li>
@@ -135,7 +135,7 @@
     </div>
      <div class="col-lg-12">
         <ul class="breadcrumb">
-            <li><a href="./UsersPage.jsp">Home</a></li>
+            <li><a href="./index.jsp">Home</a></li>
             <li class="active"><% if (newAdd != null) {
                     out.print(newAdd.getUsername());
                 }%></li>

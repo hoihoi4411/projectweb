@@ -25,14 +25,14 @@
     Lesson re = null;
     if (request.getParameter("lid") == null || !request.getParameter("lid").matches("[0-9]{1,100}")) {
         try {
-            response.sendRedirect("./AdminLession.jsp");
+            response.sendRedirect("./UsersPage.jsp");
         } catch (Exception ex) {
 
         }
         return;
     } else if (list.searchLession(request.getParameter("lid")) == null) {
         try {
-            response.sendRedirect("./AdminLession.jsp");
+            response.sendRedirect("./UsersPage.jsp");
         } catch (Exception ex) {
 
         }

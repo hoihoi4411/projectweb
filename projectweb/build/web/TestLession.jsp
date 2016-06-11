@@ -92,7 +92,7 @@
      padding-left: 37px;
      padding-top: 20px;" ng-app="myApp">
     <ul class="breadcrumb">
-        <li><a href="./UsersPage.jsp">Home</a></li>
+        <li><a href="./index.jsp">Home</a></li>
         <li class="active">Kiểm tra <% if (get != null) {
                 out.print(get.getTitle());
             } %></li>
@@ -141,7 +141,7 @@
                                 </form>  
 
                                 <ul class="breadcrumb">
-                                    <li><a href="./UsersPage.jsp">Home</a></li>
+                                    <li><a href="./index.jsp">Home</a></li>
                                     <li class="active">Kiểm tra <% if (get != null) {
                                             out.print(get.getTitle());
                                         } %></li>

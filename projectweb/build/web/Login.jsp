@@ -43,7 +43,7 @@
             }
 
             if (session.getAttribute("user") != null || ck == true) {
-                response.sendRedirect("./Index.jsp");
+                response.sendRedirect("./index.jsp");
             }
             if (request.getParameter("token") != null && request.getParameter("token").equals(session.getAttribute("token"))) {
                 Users user = new Users();
@@ -65,7 +65,7 @@
                         } else {
                             session.setAttribute("user", listUser.SearchUser(Integer.parseInt(u_id)));
                         };
-                        response.sendRedirect("./Index.jsp");
+                        response.sendRedirect("./UsersPage.jsp");
                     } else {
                         errors += "Incorrect Infor";
                     }

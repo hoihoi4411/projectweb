@@ -92,7 +92,7 @@
 
     %>
     <ul class="breadcrumb">
-        <li><a href="./Index.jsp">Home</a></li>
+        <li><a href="./index.jsp">Home</a></li>
         <li class="active">Học bài <% if (get != null) {
                 out.print(get.getTitle());
             } %></li>
@@ -171,7 +171,7 @@
         </div>
     </div>
     <ul class="breadcrumb">
-        <li><a href="./Index.jsp">Home</a></li>
+        <li><a href="./index.jsp">Home</a></li>
         <li class="active">Học bài <%  if (get != null) {
                 out.print(get.getTitle());
             }%></li>

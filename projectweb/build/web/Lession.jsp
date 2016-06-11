@@ -90,7 +90,7 @@
      padding-left: 37px;
      padding-top: 20px;    padding-bottom: 20px;">
      <ul class="breadcrumb">
-            <li><a href="./Index.jsp">Home</a></li>
+            <li><a href="./index.jsp">Home</a></li>
             <li class="active">Bài học <% if (get != null) {
                     out.print(get.getTitle());
                 } %></li>
@@ -153,7 +153,7 @@
         </div>
     </div>
          <ul class="breadcrumb">
-            <li><a href="./Index.jsp">Home</a></li>
+            <li><a href="./index.jsp">Home</a></li>
             <li class="active">Bài học <% if (get != null) {
                     out.print(get.getTitle());
                 } %></li>

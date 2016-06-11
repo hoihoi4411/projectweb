@@ -15,7 +15,7 @@
      padding-top: 20px;">
     <div class="col-lg-12">
         <ul class="breadcrumb">
-            <li><a href="./Index.jsp">Home</a></li>
+            <li><a href="./index.jsp">Home</a></li>
             <li class="active">Tạo Bài học mới</li>
         </ul>
     </div>

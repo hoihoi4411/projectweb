@@ -17,7 +17,7 @@
     String fid = request.getParameter("fid");
     if (request.getParameter("fid") == null || !request.getParameter("fid").matches("[0-9]{1,10}")) {
         try {
-            response.sendRedirect("./Index.jsp");
+            response.sendRedirect("./index.jsp");
             return;
         } catch (Exception ex) {
 
@@ -29,7 +29,7 @@
 
         if (re == null) {
             try {
-                response.sendRedirect("./Index.jsp");
+                response.sendRedirect("./index.jsp");
                 return;
             } catch (Exception ex) {
 
@@ -145,7 +145,7 @@
 <div class="container">
     <div class="col-lg-12">
         <ul class="breadcrumb">
-            <li><a href="./Index.jsp">Home</a></li>
+            <li><a href="./index.jsp">Home</a></li>
             <li class="active">Thư mục <% if (re != null) {
                     out.print(re.getName());
                 } %></li>
@@ -292,7 +292,7 @@
     </div>
     <div class="col-lg-12">
         <ul class="breadcrumb">
-            <li><a href="./Index.jsp">Home</a></li>
+            <li><a href="./index.jsp">Home</a></li>
             <li class="active">Thư mục <% if (re != null) {
                     out.print(re.getName());
                 }%></li>
