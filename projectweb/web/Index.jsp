@@ -7,7 +7,7 @@
 <%@include file="Header.jsp"  %>
 <div class="container">
     <ul class="breadcrumb">
-        <li><a href="./Index.jsp">Home</a></li>
+        <li><a href="./index.jsp">Home</a></li>
     </ul>
     <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
         <!-- Indicators -->
@@ -18,7 +18,6 @@
             <li data-target="#carousel-example-generic" data-slide-to="3"></li>
 
         </ol>
-
         <!-- Wrapper for slides -->
         <div class="carousel-inner" role="listbox">
             <div class="item active">
