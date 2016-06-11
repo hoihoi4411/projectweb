@@ -5,6 +5,8 @@
 --%>
 <%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="Header.jsp"  %>
+<% ListFolder l = new ListFolder();
+l.getFolderInData(); %>
 <div class="container">
     <ul class="breadcrumb">
         <li><a href="./index.jsp">Home</a></li>
@@ -27,11 +29,11 @@
                     <h2>Chào mừng bạn đến với QUIZLETG3<h2>
                             <ul class="list-group" >
                                 <li class="list-group-item" style="    background-color: rgba(48, 48, 48, 0.56);">
-                                    <span class="badge">14</span>
+                                    <span class="badge"><%= listUserH.getListUser().size() %></span>
                                     Thành viên
                                 </li>
                                 <li class="list-group-item"  style="    background-color: rgba(48, 48, 48, 0.56);">
-                                    <span class="badge">2</span>
+                                    <span class="badge"><%= l.getListFolder().size() %></span>
                                     Folder
                                 </li>
                                 <li class="list-group-item"  style="    background-color: rgba(48, 48, 48, 0.56);">
