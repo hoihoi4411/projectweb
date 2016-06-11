@@ -11,6 +11,6 @@
     }else{
         session.removeAttribute("admin");
         session.removeAttribute("user");
-        response.sendRedirect("./Index.jsp");
+        response.sendRedirect("./index.jsp");
     }
 %>

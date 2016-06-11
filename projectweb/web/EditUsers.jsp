@@ -1,4 +1,5 @@
 <%@include file="AdminHeader.jsp"  %>
+<%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%    Users user = null;
     if (request.getParameter("uid") == null) {
         session.removeAttribute("alert");
@@ -89,7 +90,7 @@
                 session.removeAttribute("alert"); %>
             <% if (errors != null) {%>
             <div class="alert alert-danger alert-dismissable">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">�</button>
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                 <%=  errors%>
             </div>
             <% } %>
@@ -116,7 +117,7 @@
                                     <label>Selects</label>
                                     <select class="form-control" name="permission">
                                         <option value="1">Admin</option>
-                                        <option value="2">Users</option>
+                                        <option value="2" selected="">Users</option>
                                     </select>
                                 </div>
                             </div>
@@ -128,7 +129,7 @@
                                 <input type="hidden" value="<%  session.setAttribute("token", Hash.generateToken());
                                      out.print(session.getAttribute("token"));%>" name="token">
                                 <div class="form-group">
-                                    <input type="submit" class="btn btn-default" value="Add new user">
+                                    <input type="submit" class="btn btn-danger" value="Cập nhật">
                                     <input type="reset" class="btn btn-default" value="Reset">
                                 </div>
                             </div>

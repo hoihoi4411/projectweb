@@ -102,7 +102,13 @@ public class DBConnect {
 
     public int toCountTable(String table, String where) throws SQLException {
         PreparedStatement query = null;
-        String SQL = "SELECT COUNT (*) As count FROM " + table + "  where " + where;
+        String SQL = "";
+        if (where.equals("")) {
+            SQL = "SELECT COUNT (*) As count FROM " + table;
+        } else {
+            SQL = "SELECT COUNT (*) As count FROM " + table + "  where " + where;
+
+        }
         query = connect.prepareStatement(SQL);
         ResultSet relts = query.executeQuery();
         int count = 0;
@@ -312,7 +318,7 @@ public class DBConnect {
             String sql = "delete from " + TABLE_LESSON_PK_FOLDER + " where " + FIELD_TABLE_LESSON_PK_FOLDER[0] + " = " + fid + " and " + FIELD_TABLE_LESSON_PK_FOLDER[1] + " = " + lid;
             st = connect.createStatement();
             st.execute(sql);
-            
+
         } catch (SQLException ex) {
             return false;
         }

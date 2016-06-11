@@ -8,6 +8,8 @@ package vn.fpt.project.bao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import vn.fpt.project.bo.*;
 import vn.fpt.project.dao.DBConnect;
 
@@ -84,6 +86,14 @@ public class ListFolder {
             return null;
         }
 
+    }
+
+    public int countFolder() {
+        try {
+            return DB.toCountTable(DB.TABLE_FOLDER, "");
+        } catch (SQLException ex) {
+            return 0;
+        }
     }
 
     public String toLowerCase(String input) {
@@ -233,7 +243,9 @@ public class ListFolder {
                 String title2 = toLowerCase(name);
                 input = toLowerCase(input);
                 if (title2.contains(input)) {
-                    arrayList.add(new FolderJoinUser(fid, name, sharefolder, uid, username, permission));
+                    if (sharefolder > 1) {
+                        arrayList.add(new FolderJoinUser(fid, name, sharefolder, uid, username, permission));
+                    }
                 }
             }
         } catch (SQLException ex) {

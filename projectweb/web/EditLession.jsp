@@ -71,7 +71,7 @@
             if (!hieu.equals("")) {
                 liQuiz = lisLession.GetDataRequestUpdate(hieu);
             }
-            if (validation.StringFormatMinMax(title, 5, 30, "title") && validation.NumberFormatMinMax(share, 1, 3, "share")
+            if (validation.StringFormatMinMax(title, 5, 255, "title") && validation.NumberFormatMinMax(share, 1, 3, "share")
                     && uid.matches("[0-9]+")) {
                 if (liQuiz != null) {
                     boolean re = list.UpdateLesson(get.getLid(), title, Integer.parseInt(uid), Integer.parseInt(share));

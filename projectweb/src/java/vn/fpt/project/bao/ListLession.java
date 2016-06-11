@@ -70,6 +70,14 @@ public class ListLession {
 
     }
 
+    public int countLesson() {
+        try {
+            return DB.toCountTable(DB.TABLE_LESSON, "");
+        } catch (SQLException ex) {
+            return 0;
+        }
+    }
+
     public String NomalForm(String input) {
         String[] SliString = input.split("\\s+");
         String out = "";
@@ -121,7 +129,9 @@ public class ListLession {
     }
 
     public boolean deleteLession(int id) {
-        return DB.delete(DB.FIELD_TABLE_LESSON[0] + "=" + id, DB.TABLE_LESSON);
+        boolean re = DB.delete(DB.FIELD_TABLE_LESSON[0] + "=" + id, DB.TABLE_LESSON_PK_FOLDER);
+        boolean rea = DB.delete(DB.FIELD_TABLE_LESSON[0] + "=" + id, DB.TABLE_LESSON);
+        return re && rea;
     }
 
     public HashMap<Integer, Lesson> getListLession() {
@@ -215,16 +225,18 @@ public class ListLession {
         }
         return hashmap;
     }
-    public String toLowerCase(String input){
+
+    public String toLowerCase(String input) {
         String out = "";
         char arr[] = input.toCharArray();
         for (int i = 0; i < input.length(); i++) {
             arr[i] = Character.toLowerCase(arr[i]);
-            out+=arr[i];
-            
+            out += arr[i];
+
         }
         return out;
     }
+
     public ArrayList<LessonJoinUser> GetDataSearch(String input) {
         ArrayList<LessonJoinUser> arr = new ArrayList<>();
         try {
@@ -239,7 +251,10 @@ public class ListLession {
                 String title2 = toLowerCase(title);
                 input = toLowerCase(input);
                 if (title2.contains(input)) {
-                    arr.add(new LessonJoinUser(lid, title, share, uid, username, permission));
+                    if (share > 1) {
+                        arr.add(new LessonJoinUser(lid, title, share, uid, username, permission));
+                    }
+
                 }
 
             }

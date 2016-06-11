@@ -65,7 +65,7 @@
                         <ul class="dropdown-menu dropdown-user">
                             <li><a href="#"><i class="fa fa-user fa-fw"></i> <% Users admin = (Users) session.getAttribute("admin"); out.print(admin.getUsername()); %> </a>
                             </li>
-                            <li><a href="./Index.jsp"><i class="fa fa-gear fa-fw"></i> Xem trang chủ</a>
+                            <li><a href="./index.jsp"><i class="fa fa-gear fa-fw"></i> Xem trang chủ</a>
                             </li>
                             <li class="divider"></li>
                             <li><a href="LogoutAdmin.jsp"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
@@ -80,17 +80,7 @@
                 <div class="navbar-default sidebar" role="navigation">
                     <div class="sidebar-nav navbar-collapse">
                         <ul class="nav" id="side-menu">
-                            <li class="sidebar-search">
-                                <div class="input-group custom-search-form">
-                                    <input type="text" class="form-control" placeholder="Tìm kiếm...">
-                                    <span class="input-group-btn">
-                                        <button class="btn btn-default" type="button">
-                                            <i class="fa fa-search"></i>
-                                        </button>
-                                    </span>
-                                </div>
-                                <!-- /input-group -->
-                            </li>
+                            
                             <li>
                                 <a href="./Admin.jsp"><i class="fa fa-dashboard fa-fw"></i> Trang chủ</a>
                             </li>

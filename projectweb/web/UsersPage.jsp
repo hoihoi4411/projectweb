@@ -41,7 +41,7 @@
         String id = user.substring(0, user.indexOf("|"));
         UsersSession = listUser.SearchUser(Integer.parseInt(id));
     }
-   
+
 
 %>
 <div class="container">
@@ -71,7 +71,7 @@
     <div class="col-lg-4">
         <ul class="list-group">
             <% if (UsersSession != null) {
-                
+
                     for (Map.Entry<Integer, Folder> entry : UsersSession.getListFolder().entrySet()) {
                         Integer key = entry.getKey();
                         Folder value = entry.getValue();
@@ -98,42 +98,51 @@
                 <h3 class="panel-title">Tất cả các bài học</h3>
             </div>
             <div class="panel-body">
-                <table class="table table-striped table-hover ">
-                    <tbody>
-                        <% session.removeAttribute("alert-sucess");
-                            session.removeAttribute("alert");
-                            if (UsersSession != null) {
-                                for (Map.Entry<Integer, Lesson> entry : UsersSession.getListLession().entrySet()) {
-                                    Lesson value = entry.getValue();
-                        %>
-                        <tr>
-                            <td><i class="fa fa-file  fa-2x" aria-hidden="true"></i><a href="Lession.jsp?lid=<%= value.getLid()%>" > <%= value.getTitle()%> </a></td>
-                            <td> <i class="fa fa-globe fa-2x" aria-hidden="true"></i> <% switch (value.getShare()) {
-                                    case 1:
-                                        out.print("OnlyMe");
-                                        break;
-                                    case 2:
-                                        out.print("For User");
-                                        break;
-                                    case 3:
-                                        out.print("Public");
-                                        break;
-                                }%></td>
+                <div class="dataTable_wrapper">
+                    <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                        <thead>
+                            <tr>
+                                <th>Đề bài</th>
+                                <th>Chế độ chia sẻ</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% session.removeAttribute("alert-sucess");
+                                session.removeAttribute("alert");
+                                if (UsersSession != null) {
+                                    for (Map.Entry<Integer, Lesson> entry : UsersSession.getListLession().entrySet()) {
+                                        Lesson value = entry.getValue();
+                            %>
+                            <tr>
+                                <td><i class="fa fa-file  fa-2x" aria-hidden="true"></i><a href="Lession.jsp?lid=<%= value.getLid()%>" > <%= value.getTitle()%> </a></td>
+                                <td> <i class="fa fa-globe fa-2x" aria-hidden="true"></i> <% switch (value.getShare()) {
+                                        case 1:
+                                            out.print("OnlyMe");
+                                            break;
+                                        case 2:
+                                            out.print("For User");
+                                            break;
+                                        case 3:
+                                            out.print("Public");
+                                            break;
+                                    }%></td>
                                 <td class="center">
-                                <a  class="btn btn-info btn-circle" href="./EditLession.jsp?lid=<%= value.getLid()%>"><i class="fa fa-check"></i>
+                                    <a  class="btn btn-info btn-circle" href="./EditLession.jsp?lid=<%= value.getLid()%>"><i class="fa fa-check"></i>
                                     </a>
                                     <a  class="btn btn-danger btn-circle" href="./DeleteLession.jsp?lid=<%= value.getLid()%>"><i class="fa fa-times"></i>
                                     </a>
                                 </td>
-                        </tr>
-                        <%}
-                            }%>
-                    </tbody>
-                </table>
+                            </tr>
+                            <%}
+                                }%>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
-     <div class="col-lg-12">
+    <div class="col-lg-12">
         <ul class="breadcrumb">
             <li><a href="./index.jsp">Home</a></li>
             <li class="active"><% if (newAdd != null) {

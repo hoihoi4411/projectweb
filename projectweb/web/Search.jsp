@@ -64,7 +64,7 @@
                             </div>
                             <div class="col-lg-4"><i class="fa fa-globe fa-2x" aria-hidden="true"></i>
                                 <%
-                                    switch (arrayList.get(i).getPermission()) {
+                                    switch (arrayList.get(i).getShare()) {
                                         case 1:
                                             out.print("Chỉ mình tôi");
                                             break;
@@ -111,11 +111,11 @@
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <div class="col-lg-8">
-                                <i class="fa fa-folder fa-2x" style="    color: #921877;" aria-hidden="true"></i>    <a href="./Lession.jsp?lid=<%=  arrayList1.get(i).getFid()%>"><%= arrayList1.get(i).getName()%></a>
+                                <i class="fa fa-folder fa-2x" style="    color: #921877;" aria-hidden="true"></i>    <a href="./Folder.jsp?fid=<%=  arrayList1.get(i).getFid()%>"><%= arrayList1.get(i).getName()%></a>
                             </div>
                             <div class="col-lg-4"><i class="fa fa-globe fa-2x" aria-hidden="true"></i>
                                 <%
-                                    switch (arrayList1.get(i).getPermission()) {
+                                    switch (arrayList1.get(i).getSharefolder()) {
                                         case 1:
                                             out.print("Chỉ mình tôi");
                                             break;

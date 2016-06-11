@@ -9,7 +9,8 @@
     listb.getListData();
     ArrayList<Users> li = listb.getListUser();
     ListFolder listFo = new ListFolder();
-    if (request.getParameter("token") != null && request.getParameter("token").equals(session.getAttribute("token")) && request.getParameter("submit") != null) {
+    out.print(request.getParameter("token") != null && request.getParameter("token").equals(session.getAttribute("token")));
+    if (request.getParameter("submit") != null) {
         session.removeAttribute("token");
         Validation validation2 = new Validation();
         String name = request.getParameter("name");

@@ -6,7 +6,9 @@
 <%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="Header.jsp"  %>
 <% ListFolder l = new ListFolder();
-l.getFolderInData(); %>
+    int countF = l.countFolder();
+    ListLession listLession = new ListLession();
+    int countL = listLession.countLesson();%>
 <div class="container">
     <ul class="breadcrumb">
         <li><a href="./index.jsp">Home</a></li>
@@ -29,15 +31,15 @@ l.getFolderInData(); %>
                     <h2>Chào mừng bạn đến với QUIZLETG3<h2>
                             <ul class="list-group" >
                                 <li class="list-group-item" style="    background-color: rgba(48, 48, 48, 0.56);">
-                                    <span class="badge"><%= listUserH.getListUser().size() %></span>
+                                    <span class="badge"><%= listUserH.getListUser().size()%></span>
                                     Thành viên
                                 </li>
                                 <li class="list-group-item"  style="    background-color: rgba(48, 48, 48, 0.56);">
-                                    <span class="badge"><%= l.getListFolder().size() %></span>
+                                    <span class="badge"><%=countF%></span>
                                     Folder
                                 </li>
                                 <li class="list-group-item"  style="    background-color: rgba(48, 48, 48, 0.56);">
-                                    <span class="badge">1</span>
+                                    <span class="badge"><%= countL%></span>
                                     Lesson
                                 </li>
                             </ul>
@@ -48,21 +50,21 @@ l.getFolderInData(); %>
                                      width: 1150px;">
                                 <div class="carousel-caption">
                                     <h2>Cùng trải nghiệm học tập với QUIZLETG3<h2>
-                                            <a href="#" class="btn btn-primary btn-lg">Đăng ký</a><a href="#" class="btn btn-primary btn-lg">Đăng Nhập</a>
+                                            <a href="./Login.jsp" class="btn btn-primary btn-lg">Đăng ký</a><a href="./CreateUser.jsp" class="btn btn-primary btn-lg">Đăng Nhập</a>
                                             </div>
                                             </div>
                                             <div class="item">
                                                 <img src="./style/img/3.jpg" alt=" Học Tập" style="    height: 500px;
                                                      width: 1150px;">
                                                 <div class="carousel-caption">
-                                                    Học Tập
+                                                    <h1> Học Từ mới một cách thuận tiện hơn</h1>
                                                 </div>
                                             </div>
                                             <div class="item">
                                                 <img src="./style/img/4.jpg" alt=" Học Tập" style="    height: 500px;
                                                      width: 1150px;">
                                                 <div class="carousel-caption">
-                                                    Học Tập
+                                                    <h1>Học từ mới mỗi ngày với Quizlet</h1>
                                                 </div>
                                             </div>
                                             </div>

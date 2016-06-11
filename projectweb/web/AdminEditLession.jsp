@@ -29,7 +29,7 @@
         title = new String(bytes, StandardCharsets.UTF_8);
         String uid = request.getParameter("uid");
         String share = request.getParameter("share");
-        if (validation.StringFormatMinMax(title, 5, 30, "title") && listb.SearchUser(Integer.parseInt(uid)) != null && validation.NumberFormatMinMax(share, 1, 3, "share")) {
+        if (validation.StringFormatMinMax(title, 5, 255, "title") && listb.SearchUser(Integer.parseInt(uid)) != null && validation.NumberFormatMinMax(share, 1, 3, "share")) {
             boolean re = list.UpdateLesson(get.getLid(), title, Integer.parseInt(uid), Integer.parseInt(share));
             if (re) {
                 session.removeAttribute("alert-sucess");

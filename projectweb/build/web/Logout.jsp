@@ -18,7 +18,7 @@
 
     }
     if (session.getAttribute("user") == null && ck == false) {
-        response.sendRedirect("./Index.jsp");
+        response.sendRedirect("./index.jsp");
     } else if (session.getAttribute("user") != null) {
         session.invalidate();
     } else if (cookies != null) {
@@ -31,7 +31,7 @@
         }
     }
     try {
-        response.sendRedirect("./Index.jsp");
+        response.sendRedirect("./index.jsp");
     } catch (Exception e) {
 
     }

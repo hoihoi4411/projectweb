@@ -14,7 +14,7 @@ import vn.fpt.project.dao.DBConnect;
  */
 public class Admin extends Users {
 
-    private final int idAdmin = 1;
+    private final int[] idAdmin = {1};
     private DBConnect DB;
 
     public Admin() {
@@ -23,10 +23,12 @@ public class Admin extends Users {
 
     public boolean isAdmin(String username, String password) {
         try {
-            String where = "username = '" + username + "' and password = '" + Hash.Sha256(password + username) + "' and uid = " + idAdmin;
-            int count = DB.toCountTable(DB.TABLE_USERS, where);
-            if (count == 1) {
-                return true;
+            for (int i = 0; i < idAdmin.length; i++) {
+                String where = "username = '" + username + "' and password = '" + Hash.Sha256(password + username) + "' and uid = " + idAdmin[i];
+                int count = DB.toCountTable(DB.TABLE_USERS, where);
+                if (count == 1) {
+                    return true;
+                }
             }
 
         } catch (SQLException ex) {

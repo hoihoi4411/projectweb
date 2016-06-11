@@ -90,7 +90,7 @@
                     </button>
                     <!-- Branding Image -->
                     <a id="gkLogo"></a>
-                    <a class="navbar-brand" href="./Index.jsp">
+                    <a class="navbar-brand" href="./index.jsp">
                         QUIZLETG3
                     </a>
                 </div>

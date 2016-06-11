@@ -108,12 +108,12 @@
                 <div ng-repeat="(key, item) in items"  class="form-group">
                     <input type="hidden" placeholder="Enter Question" ng-model="item.id" class="form-control">
 
-                    <div class="col-lg-4">
+                    <div class="col-lg-4" >
                         <i class="fa fa-question fa-2x" aria-hidden="true"></i> <span style="font-size: 15px; font-weight: 800"> Câu hỏi {{key + 1}}: {{item.question}}<span>
                                 </div>
                                 <div class="col-lg-5">
-                                    <input ng-class="{
-                                                'blockInput': !item.inlineChecked}" type="text" class="form-control" placeholder="Enter Answer" ng-model="item.text" required="">
+                                    <input  ng-class="{
+                                                'blockInput': !item.inlineChecked}" type="text" class="form-control" placeholder="Enter Answer" ng-model="item.text" id="{{key}}" required="">
 
                                 </div>
                                 {{item.result}}
@@ -123,17 +123,20 @@
                                         <h4> <span class="label label-success">Tổng số câu hỏi :</span> {{total}} câu</h4>
                                     </div>
                                     <div class="col-lg-3">
-                                         <h4>  <span class="label label-danger">Số câu trả lời sai : </span>  {{refalse}}  </h4>   
+                                        <h4>  <span class="label label-danger">Số câu trả lời sai : </span>  {{refalse}}  </h4>   
                                     </div>
 
                                     <div class="col-lg-3">
-                                         <h4>  <span class="label label-primary">Số câu trả lời đúng : </span>  {{retrue}}    </h4> 
+                                        <h4>  <span class="label label-primary">Số câu trả lời đúng : </span>  {{retrue}}    </h4> 
                                     </div>
                                     <div class="col-lg-3">
                                         <h4>   <span class="label label-default">Điểm số: </span>  {{retrue * (total / 10)}}    </h4> 
                                     </div>
-                                    <div class="col-lg-12">
+                                    <div class="col-lg-6"  id="Check">
                                         <a class="btn btn-primary" ng-click="check()">Kiểm tra</a>
+                                    </div>
+                                    <div class="col-lg-6" id="reCheck">
+                                        <a class="btn btn-danger" ng-click="reCheck()">Kiểm tra lại</a>
                                     </div>
                                 </div>
                                 </div>
@@ -172,15 +175,20 @@
                                     var data = <%=data%>;
                                     var dataCheck = <%=dataCheck%>;
                                     var mymodal = angular.module('myApp', []);
+                                    var id;
                                     mymodal.controller('Note', function ($scope) {
+                                        $("#reCheck").addClass("block");
                                         $scope.items = data;
                                         $scope.total = tottal;
                                         $scope.retrue = 0;
+                                        $scope.id = "";
                                         $scope.refalse = 0;
-
+                                        $scope.checkRe = false;
                                         $scope.check = function () {
+
                                             angular.forEach($scope.items, function (value, key) {
-                                                if (value.key === dataCheck[key].key) {
+
+                                                if (value.key === dataCheck[key].key && $scope.checkRe === false) {
                                                     if (value.text === dataCheck[key].answer) {
                                                         value.result = "Dung";
                                                         $scope.retrue++;
@@ -188,10 +196,35 @@
                                                         value.result = "Sai";
                                                         $scope.refalse++;
                                                     }
-                                                }
-                                            });
 
+                                                }
+
+                                                $scope.id = key;
+                                                $("#" + $scope.id).attr('disabled', 'disabled');
+                                                $("#Check").addClass("block");
+                                                $("#reCheck").removeClass("block");
+                                            });
+                                            $scope.checkRe = true;
+                                        }
+                                        $scope.reCheck = function () {
+                                            $scope.items = data;
+                                            $scope.total = tottal;
+                                            $scope.retrue = 0;
+                                            $scope.id = "";
+                                            $scope.refalse = 0;
+                                            $scope.checkRe = false;
+                                            $("#Check").removeClass("block");
+                                            $("#reCheck").addClass("block");
+                                            angular.forEach($scope.items, function (value, key) {
+                                                $scope.id = key;
+                                                $("#" + $scope.id).removeAttr('disabled');
+                                            });
                                         }
                                     });
                                 </script>
+                                <style type="text/css">
+                                    .block{
+                                        display:  none;
+                                    }
+                                </style>
                                 <%@include file="Footer.jsp"  %>

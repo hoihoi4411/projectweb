@@ -21,7 +21,7 @@
             liQuiz = lisLession.GetDataRequest(hieu);
         }
          
-        if (validation.StringFormatOnlyLetterAndDigitsAndBackSpace(title, 5, 30, "title") && validation.NumberFormatMinMax(share, 1, 3, "share")
+        if (validation.StringFormatOnlyLetterAndDigitsAndBackSpace(title, 5, 255, "title") && validation.NumberFormatMinMax(share, 1, 3, "share")
                 && uid.matches("[0-9]+")) {
             if (liQuiz != null) {
                 if (listb.SearchUser(Integer.parseInt(uid)) != null) {

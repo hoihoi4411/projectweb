@@ -113,7 +113,7 @@
                                 <% for (int i = 1;
                                             i < lista.getListUser()
                                             .size(); i++) {
-                                        if (lista.getListUser().get(i).getPermission() != 1) {
+                                        if (lista.getListUser().get(i).getUid()!= 1) {
                                 %>
 
                                 <tr class="odd gradeX">
