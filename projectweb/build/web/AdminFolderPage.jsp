@@ -35,9 +35,6 @@
                                 if (id != null && Integer.parseInt(id) == listLession.get(i).getLid()) {
                                     resut = list.DeleteLessionInFolder(id, request.getParameter("fid"));
                                 }
-                                if (resut == false) {
-                                    break;
-                                }
                             }
                             if (!resut) {
             %>

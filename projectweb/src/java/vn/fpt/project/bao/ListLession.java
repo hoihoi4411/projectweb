@@ -70,7 +70,32 @@ public class ListLession {
 
     }
 
+    public String NomalForm(String input) {
+        String[] SliString = input.split("\\s+");
+        String out = "";
+        for (int i = 0; i < SliString.length; i++) {
+            char arrChar[] = SliString[i].toCharArray();
+            int position = -1;
+            int count = 0;
+            for (int j = 0; j < arrChar.length; j++) {
+                if (Character.isLetter(arrChar[j]) && count == 0) {
+                    position = j;
+                    count++;
+                    arrChar[j] = Character.toUpperCase(arrChar[j]);
+                }
+                if (position != j && Character.isUpperCase(arrChar[j])) {
+                    arrChar[j] = Character.toLowerCase(arrChar[j]);
+                }
+                out += arrChar[j];
+            }
+            out += " ";
+
+        }
+        return out;
+    }
+
     public boolean UpdateLesson(int lid, String title, int uid, int share) {
+        title = NomalForm(title);
         String set = DB.FIELD_TABLE_LESSON[1] + " = N'" + title + "', " + DB.FIELD_TABLE_LESSON[2] + " = " + uid + " , " + DB.FIELD_TABLE_LESSON[3] + " = " + share;
         String where = DB.FIELD_TABLE_LESSON[0] + " = " + lid;
         return DB.Update(DB.TABLE_LESSON, set, where);
@@ -89,6 +114,7 @@ public class ListLession {
     }
 
     public boolean addNewLesson(String title, String uid, String share) {
+        title = NomalForm(title);
         String fiel = "(" + DB.FIELD_TABLE_LESSON[1] + ", " + DB.FIELD_TABLE_LESSON[2] + ", " + DB.FIELD_TABLE_LESSON[3] + ")";
         String value = "(N'" + title + "', " + uid + ", " + share + ")";
         return DB.InsertFolder(DB.TABLE_LESSON, fiel, value);
@@ -189,7 +215,16 @@ public class ListLession {
         }
         return hashmap;
     }
-
+    public String toLowerCase(String input){
+        String out = "";
+        char arr[] = input.toCharArray();
+        for (int i = 0; i < input.length(); i++) {
+            arr[i] = Character.toLowerCase(arr[i]);
+            out+=arr[i];
+            
+        }
+        return out;
+    }
     public ArrayList<LessonJoinUser> GetDataSearch(String input) {
         ArrayList<LessonJoinUser> arr = new ArrayList<>();
         try {
@@ -201,10 +236,12 @@ public class ListLession {
                 int uid = resultSet.getInt(DB.FIELD_TABLE_LESSON[2]);
                 String username = resultSet.getNString(DB.FIELD_TABLE_USERS[1]);
                 int permission = resultSet.getInt(DB.FIELD_TABLE_USERS[3]);
-                if(title.contains(input)){
-                   arr.add(new LessonJoinUser(lid, title, share, uid, username, permission));
+                String title2 = toLowerCase(title);
+                input = toLowerCase(input);
+                if (title2.contains(input)) {
+                    arr.add(new LessonJoinUser(lid, title, share, uid, username, permission));
                 }
-                
+
             }
         } catch (SQLException ex) {
             System.out.println(ex);
@@ -212,11 +249,6 @@ public class ListLession {
         }
         return arr;
     }
-    public static void main(String[] args) {
-        ListLession l = new ListLession();
-        System.out.println(l.GetDataSearch("Hội"));
-    }
-
 }
 
 class LessonJoinFolder {

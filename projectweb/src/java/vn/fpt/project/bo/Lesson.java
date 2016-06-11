@@ -48,27 +48,7 @@ public class Lesson {
         return listAQuiz;
     }
 
-    public String NomalForm(String input) {
-        String[] SliString = input.split("\\s+");
-        String out = "";
-        for (int i = 0; i < SliString.length; i++) {
-            char arrChar[] = SliString[i].toCharArray();
-            int position = -1;
-            for (int j = 0; j < arrChar.length; j++) {
-                if (Character.isLetter(arrChar[j])) {
-                    position = j;
-                    arrChar[j] = Character.toUpperCase(arrChar[j]);
-                }
-                if (position != -1) {
-                    arrChar[j] = Character.toLowerCase(arrChar[j]);
-                }
-                out += arrChar[j];
-            }
-            out += " ";
-
-        }
-        return out;
-    }
+    
 
     public int getLid() {
         return lid;
@@ -106,8 +86,5 @@ public class Lesson {
     public String toString() {
         return lid + "   " + title + "\n";
     }
-    public static void main(String[] args) {
-        Lesson l = new Lesson();
-        System.out.println(l.NomalForm(".net and java"));
-    }
+
 }

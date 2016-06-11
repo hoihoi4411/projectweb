@@ -86,7 +86,43 @@ public class ListFolder {
 
     }
 
+    public String toLowerCase(String input) {
+        String out = "";
+        char arr[] = input.toCharArray();
+        for (int i = 0; i < input.length(); i++) {
+            arr[i] = Character.toLowerCase(arr[i]);
+            out += arr[i];
+
+        }
+        return out;
+    }
+
+    public String NomalForm(String input) {
+        String[] SliString = input.split("\\s+");
+        String out = "";
+        for (int i = 0; i < SliString.length; i++) {
+            char arrChar[] = SliString[i].toCharArray();
+            int position = -1;
+            int count = 0;
+            for (int j = 0; j < arrChar.length; j++) {
+                if (Character.isLetter(arrChar[j]) && count == 0) {
+                    position = j;
+                    count++;
+                    arrChar[j] = Character.toUpperCase(arrChar[j]);
+                }
+                if (position != j && Character.isUpperCase(arrChar[j])) {
+                    arrChar[j] = Character.toLowerCase(arrChar[j]);
+                }
+                out += arrChar[j];
+            }
+            out += " ";
+
+        }
+        return out;
+    }
+
     public boolean InsertFolder(String name, String uid, String sharefolder) {
+        name = NomalForm(name);
         String fiel = "(" + DB.FIELD_TABLE_FOLDER[1] + "," + DB.FIELD_TABLE_FOLDER[2] + "," + DB.FIELD_TABLE_FOLDER[3] + ")";
         String value = "(N'" + name + "'," + Integer.parseInt(uid) + "," + Integer.parseInt(sharefolder) + ")";
         return DB.InsertFolder(DB.TABLE_FOLDER, fiel, value);
@@ -144,6 +180,7 @@ public class ListFolder {
         if (id == null || id.equals("") || !id.matches("[0-9]{1,10}")) {
             return false;
         }
+        name = NomalForm(name);
         int fid = Integer.parseInt(id);
         String set = DB.FIELD_TABLE_FOLDER[1] + "=N'" + name + "'," + DB.FIELD_TABLE_FOLDER[2] + " = " + uid + "," + DB.FIELD_TABLE_FOLDER[3] + "=" + sharefolder;
         String where = DB.FIELD_TABLE_FOLDER[0] + "=" + id;
@@ -181,9 +218,10 @@ public class ListFolder {
         String val = "(" + fid + ", " + lid + ")";
         return DB.InsertFolder(DB.TABLE_LESSON_PK_FOLDER, fied, val);
     }
-    public ArrayList<FolderJoinUser> getSearchData(String input){
-         ArrayList<FolderJoinUser> arrayList = new ArrayList<>();
-         try {
+
+    public ArrayList<FolderJoinUser> getSearchData(String input) {
+        ArrayList<FolderJoinUser> arrayList = new ArrayList<>();
+        try {
             ResultSet resultSet = DB.selectQueryJoinTwoTable(DB.TABLE_FOLDER, DB.TABLE_USERS, "Pro_Folder.uid = Pro_Users.uid ", "fid, name, Pro_Users.uid, sharefolder, username, permission");
             while (resultSet.next()) {
                 int fid = resultSet.getInt(DB.FIELD_TABLE_FOLDER[0]);
@@ -192,15 +230,15 @@ public class ListFolder {
                 int uid = resultSet.getInt(DB.FIELD_TABLE_FOLDER[2]);
                 String username = resultSet.getNString(DB.FIELD_TABLE_USERS[1]);
                 int permission = resultSet.getInt(DB.FIELD_TABLE_USERS[3]);
-                if(name.contains(input)){
-                   arrayList.add(new FolderJoinUser(fid, name, sharefolder, uid, username, permission)); 
+                String title2 = toLowerCase(name);
+                input = toLowerCase(input);
+                if (title2.contains(input)) {
+                    arrayList.add(new FolderJoinUser(fid, name, sharefolder, uid, username, permission));
                 }
             }
         } catch (SQLException ex) {
             return null;
         }
-         return arrayList;
+        return arrayList;
     }
 }
-
-

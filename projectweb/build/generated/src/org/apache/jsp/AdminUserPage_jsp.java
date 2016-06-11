@@ -61,8 +61,8 @@ public final class AdminUserPage_jsp extends org.apache.jasper.runtime.HttpJspBa
       out.write("        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n");
       out.write("        <title>Admin Control Panel</title>\n");
       out.write("        <!-- Latest compiled and minified CSS -->\n");
-      out.write("        <link rel=\"stylesheet\" href=\"./style/css/bootstrap.min.css\">\n");
       out.write("\n");
+      out.write("        <link rel=\"stylesheet\" href=\"./style/css/bootstrap.min.css\" >\n");
       out.write("        <!-- Optional theme -->\n");
       out.write("        <link rel=\"stylesheet\" href=\"./style/css/bootstrap-theme.min.css\" >\n");
       out.write("\n");
@@ -71,6 +71,8 @@ public final class AdminUserPage_jsp extends org.apache.jasper.runtime.HttpJspBa
       out.write("        <link href=\"./style/css/font-awesome.min.css\" rel=\"stylesheet\" type=\"text/css\">\n");
       out.write("        <!-- DataTables CSS -->\n");
       out.write("        <link href=\"./style/css/dataTables.bootstrap.css\" rel=\"stylesheet\">\n");
+      out.write("        \n");
+      out.write("        <script src=\"./style/js/angular.min.js\"></script>\n");
       out.write("\n");
       out.write("        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->\n");
       out.write("        <!--[if lt IE 9]>\n");
@@ -78,21 +80,27 @@ public final class AdminUserPage_jsp extends org.apache.jasper.runtime.HttpJspBa
       out.write("          <script src=\"https://oss.maxcdn.com/respond/1.4.2/respond.min.js\"></script>\n");
       out.write("        <![endif]-->\n");
       out.write("    </head>\n");
-      out.write("    <body ng-app=\"myappMo\">\n");
+      out.write("    <body >\n");
       out.write("        ");
 
             if (session.getAttribute("admin") == null) {
-                response.sendRedirect("./LoginAdmin.jsp");
+                try {
+                    response.sendRedirect("./LoginAdmin.jsp");
+                    
+                } catch (Exception ex) {
+
+                }
+                return;
             }
             ListUser lista = new ListUser();
-             
+
         
       out.write("\n");
       out.write("\n");
-      out.write("        <div id=\"wrapper\" ng-controller=\"MyController\">\n");
+      out.write("        <div id=\"wrapper\" >\n");
       out.write("\n");
       out.write("            <!-- Navigation -->\n");
-      out.write("            <nav class=\"navbar navbar-default navbar-static-top\" role=\"navigation\" style=\"margin-bottom: 0\">\n");
+      out.write("            <nav class=\"navbar navbar-inverse navbar-static-top\" role=\"navigation\" style=\"margin-bottom: 0\">\n");
       out.write("                <div class=\"navbar-header\">\n");
       out.write("                    <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\".navbar-collapse\">\n");
       out.write("                        <span class=\"sr-only\">Điều hướng</span>\n");
@@ -100,7 +108,7 @@ public final class AdminUserPage_jsp extends org.apache.jasper.runtime.HttpJspBa
       out.write("                        <span class=\"icon-bar\"></span>\n");
       out.write("                        <span class=\"icon-bar\"></span>\n");
       out.write("                    </button>\n");
-      out.write("                    <a class=\"navbar-brand\" href=\"index.html\">Admin Control Panel</a>\n");
+      out.write("                    <a class=\"navbar-brand\" href=\"./Admin.jsp\">Admin Control Panel</a>\n");
       out.write("                </div>\n");
       out.write("                <!-- /.navbar-header -->\n");
       out.write("\n");
@@ -108,36 +116,14 @@ public final class AdminUserPage_jsp extends org.apache.jasper.runtime.HttpJspBa
       out.write("                    <!-- /.dropdown -->\n");
       out.write("                    <li class=\"dropdown\">\n");
       out.write("                        <a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\">\n");
-      out.write("                            <i class=\"fa fa-bell fa-fw\"></i>  <i class=\"fa fa-caret-down\"></i>\n");
-      out.write("                        </a>\n");
-      out.write("                        <ul class=\"dropdown-menu dropdown-user\">\n");
-      out.write("                            <li>\n");
-      out.write("                                <a href=\"#\">\n");
-      out.write("                                    <i class=\"fa fa-envelope fa-fw\"></i> Tiếng Việt\n");
-      out.write("\n");
-      out.write("                                </a>\n");
-      out.write("                            </li>\n");
-      out.write("                            <li class=\"divider\"></li>\n");
-      out.write("                            <li>\n");
-      out.write("                                <a href=\"#\">\n");
-      out.write("                                    <i class=\"fa fa-tasks fa-fw\"></i> Tiếng Anh\n");
-      out.write("                                </a>\n");
-      out.write("                            </li>\n");
-      out.write("\n");
-      out.write("                        </ul>\n");
-      out.write("                        <!-- /.dropdown-alerts -->\n");
-      out.write("                    </li>\n");
-      out.write("                    <!-- /.dropdown -->\n");
-      out.write("                    <li class=\"dropdown\">\n");
-      out.write("                        <a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\">\n");
       out.write("                            <i class=\"fa fa-user fa-fw\"></i>  <i class=\"fa fa-caret-down\"></i>\n");
       out.write("                        </a>\n");
       out.write("                        <ul class=\"dropdown-menu dropdown-user\">\n");
       out.write("                            <li><a href=\"#\"><i class=\"fa fa-user fa-fw\"></i> ");
-      out.print( session.getAttribute("admin"));
+ Users admin = (Users) session.getAttribute("admin"); out.print(admin.getUsername()); 
       out.write(" </a>\n");
       out.write("                            </li>\n");
-      out.write("                            <li><a href=\"#\"><i class=\"fa fa-gear fa-fw\"></i> Settings</a>\n");
+      out.write("                            <li><a href=\"./Index.jsp\"><i class=\"fa fa-gear fa-fw\"></i> Xem trang chủ</a>\n");
       out.write("                            </li>\n");
       out.write("                            <li class=\"divider\"></li>\n");
       out.write("                            <li><a href=\"LogoutAdmin.jsp\"><i class=\"fa fa-sign-out fa-fw\"></i> Logout</a>\n");
@@ -154,7 +140,7 @@ public final class AdminUserPage_jsp extends org.apache.jasper.runtime.HttpJspBa
       out.write("                        <ul class=\"nav\" id=\"side-menu\">\n");
       out.write("                            <li class=\"sidebar-search\">\n");
       out.write("                                <div class=\"input-group custom-search-form\">\n");
-      out.write("                                    <input type=\"text\" class=\"form-control\" placeholder=\"Search...\">\n");
+      out.write("                                    <input type=\"text\" class=\"form-control\" placeholder=\"Tìm kiếm...\">\n");
       out.write("                                    <span class=\"input-group-btn\">\n");
       out.write("                                        <button class=\"btn btn-default\" type=\"button\">\n");
       out.write("                                            <i class=\"fa fa-search\"></i>\n");
@@ -164,13 +150,13 @@ public final class AdminUserPage_jsp extends org.apache.jasper.runtime.HttpJspBa
       out.write("                                <!-- /input-group -->\n");
       out.write("                            </li>\n");
       out.write("                            <li>\n");
-      out.write("                                <a href=\"./Admin.jsp\"><i class=\"fa fa-dashboard fa-fw\"></i> Setting</a>\n");
+      out.write("                                <a href=\"./Admin.jsp\"><i class=\"fa fa-dashboard fa-fw\"></i> Trang chủ</a>\n");
       out.write("                            </li>\n");
       out.write("                            <li>\n");
-      out.write("                                <a href=\"#\"><i class=\"fa fa-bar-chart-o fa-fw\"></i> Users <span class=\"fa arrow\"></span></a>\n");
+      out.write("                                <a href=\"#\"><i class=\"fa fa-bar-chart-o fa-fw\"></i> Thành viên <span class=\"fa arrow\"></span></a>\n");
       out.write("                                <ul class=\"nav nav-second-level\">\n");
       out.write("                                    <li>\n");
-      out.write("                                        <a href=\"./AdminUser.jsp\">Users</a>\n");
+      out.write("                                        <a href=\"./AdminUser.jsp\">Thành viên</a>\n");
       out.write("                                    </li>\n");
       out.write("                                </ul>\n");
       out.write("                                <!-- /.nav-second-level -->\n");
@@ -178,19 +164,19 @@ public final class AdminUserPage_jsp extends org.apache.jasper.runtime.HttpJspBa
       out.write("\n");
       out.write("\n");
       out.write("                            <li>\n");
-      out.write("                                <a href=\"#\"><i class=\"fa fa-wrench fa-fw\"></i> Lession <span class=\"fa arrow\"></span></a>\n");
+      out.write("                                <a href=\"#\"><i class=\"fa fa-wrench fa-fw\"></i> Bài học <span class=\"fa arrow\"></span></a>\n");
       out.write("                                <ul class=\"nav nav-second-level\">\n");
       out.write("                                    <li>\n");
-      out.write("                                        <a href=\"./AdminLession.jsp\">Lession</a>\n");
+      out.write("                                        <a href=\"./AdminLession.jsp\">Bài học</a>\n");
       out.write("                                    </li>\n");
       out.write("                                </ul>\n");
       out.write("                                <!-- /.nav-second-level -->\n");
       out.write("                            </li>\n");
-      out.write("                             <li>\n");
-      out.write("                                <a href=\"#\"><i class=\"fa fa-wrench fa-fw\"></i> Folder <span class=\"fa arrow\"></span></a>\n");
+      out.write("                            <li>\n");
+      out.write("                                <a href=\"#\"><i class=\"fa fa-wrench fa-fw\"></i> Thư mục <span class=\"fa arrow\"></span></a>\n");
       out.write("                                <ul class=\"nav nav-second-level\">\n");
       out.write("                                    <li>\n");
-      out.write("                                        <a href=\"./AdminFolder.jsp\">Folder</a>\n");
+      out.write("                                        <a href=\"./AdminFolder.jsp\">Thư mục</a>\n");
       out.write("                                    </li>\n");
       out.write("                                </ul>\n");
       out.write("                                <!-- /.nav-second-level -->\n");
@@ -204,6 +190,7 @@ public final class AdminUserPage_jsp extends org.apache.jasper.runtime.HttpJspBa
       out.write('\n');
       out.write('\n');
   Users user = null;
+
     if (request.getParameter("uid") == null) {
         try {
             response.sendRedirect("./AdminUser.jsp");
@@ -224,16 +211,12 @@ public final class AdminUserPage_jsp extends org.apache.jasper.runtime.HttpJspBa
             }
 
         } catch (Exception ex) {
-            out.print(ex);
-            //response.sendRedirect("./AdminUser.jsp");
+            response.sendRedirect("./AdminUser.jsp");
         }
 
     }
-    for (Map.Entry<Integer, Folder> entry : user.getListFolder().entrySet()) {
-        Object key = entry.getKey();
-        Object value = entry.getValue();
-
-    }
+    ListFolder listFolder = new ListFolder();
+    listFolder.setListFolder(user.getListFolder());
 
       out.write("\n");
       out.write("<div id=\"page-wrapper\">\n");
@@ -255,8 +238,25 @@ public final class AdminUserPage_jsp extends org.apache.jasper.runtime.HttpJspBa
       out.write("                    Information\n");
       out.write("                </div>\n");
       out.write("                <div class=\"panel-body\">\n");
-      out.write("                    <p class=\"lead\">Total Folder : </p>\n");
-      out.write("                    <p>Total lession : </p>\n");
+      out.write("                    <p class=\"lead\">Total Folder :  ");
+
+                        if (user.getListFolder() != null) {
+                            out.print(user.getListFolder().size());
+                        } else {
+                            out.print(0);
+                        }
+                        
+      out.write("</p>\n");
+      out.write("                    <p>Total lession :\n");
+      out.write("                        ");
+
+                            if (user.getListLession() != null) {
+                                out.print(user.getListLession().size());
+                            } else {
+                                out.print(0);
+                            }
+                        
+      out.write("</p>\n");
       out.write("                </div>\n");
       out.write("                <!-- /.panel-body -->\n");
       out.write("            </div>\n");
@@ -290,32 +290,240 @@ public final class AdminUserPage_jsp extends org.apache.jasper.runtime.HttpJspBa
       out.write("                <div>\n");
       out.write("\n");
       out.write("                    <!-- Nav tabs -->\n");
+      out.write("                    ");
+ if (user.getListFolder() != null) { 
+      out.write("\n");
       out.write("                    <ul class=\"nav nav-tabs\" role=\"tablist\">\n");
       out.write("                        ");
- for (Map.Entry<Integer, Folder> entry : user.getListFolder().entrySet()) {
+ int i = 0;
+                            for (Map.Entry<Integer, Folder> entry : user.getListFolder().entrySet()) {
+                                Folder value = entry.getValue();
+                                if (i == 0) {
+
+                        
       out.write("\n");
-      out.write("                        <li role=\"presentation\" class=\"active\"><a href=\"#home\" aria-controls=\"home\" role=\"tab\" data-toggle=\"tab\">Home</a></li>\n");
-      out.write("                        <li role=\"presentation\"><a href=\"#profile\" aria-controls=\"profile\" role=\"tab\" data-toggle=\"tab\">Profile</a></li>\n");
-      out.write("                        <li role=\"presentation\"><a href=\"#messages\" aria-controls=\"messages\" role=\"tab\" data-toggle=\"tab\">Messages</a></li>\n");
-      out.write("                        <li role=\"presentation\"><a href=\"#settings\" aria-controls=\"settings\" role=\"tab\" data-toggle=\"tab\">Settings</a></li>\n");
+      out.write("                        <li role=\"presentation\" class=\"active\"><a href=\"#");
+      out.print( value.getFid());
+      out.write("\" aria-controls=\"");
+      out.print(  value.getFid());
+      out.write("\" role=\"tab\" data-toggle=\"tab\">");
+      out.print( value.getName());
+      out.write("</a></li>\n");
+      out.write("                            ");
+  } else {
+      out.write("\n");
+      out.write("                        <li role=\"presentation\"><a href=\"#");
+      out.print( value.getFid());
+      out.write("\" aria-controls=\"");
+      out.print( value.getFid());
+      out.write("\" role=\"tab\" data-toggle=\"tab\">");
+      out.print( value.getName());
+      out.write("</a></li>\n");
       out.write("                            ");
   }
+                                    i++;
+                                }
       out.write("\n");
       out.write("                    </ul>\n");
       out.write("\n");
       out.write("                    <!-- Tab panes -->\n");
       out.write("                    <div class=\"tab-content\">\n");
-      out.write("                        <div role=\"tabpanel\" class=\"tab-pane active\" id=\"home\">...</div>\n");
-      out.write("                        <div role=\"tabpanel\" class=\"tab-pane\" id=\"profile\">...</div>\n");
-      out.write("                        <div role=\"tabpanel\" class=\"tab-pane\" id=\"messages\">...</div>\n");
-      out.write("                        <div role=\"tabpanel\" class=\"tab-pane\" id=\"settings\">...</div>\n");
+      out.write("                        ");
+  i = 0;
+                            for (Map.Entry<Integer, Folder> entry : user.getListFolder().entrySet()) {
+                                Integer key = entry.getKey();
+                                Folder value = entry.getValue();
+                                if (i == 0) {
+                        
+      out.write("\n");
+      out.write("                        <div role=\"tabpanel\" class=\"tab-pane active\" id=\"");
+      out.print( value.getFid());
+      out.write("\">\n");
+      out.write("                            <table class=\"table table-striped table-hover \">\n");
+      out.write("                                <thead>\n");
+      out.write("                                    <tr>\n");
+      out.write("                                        <th>#</th>\n");
+      out.write("                                        <th>Lesson</th>\n");
+      out.write("                                        <th>Share</th>\n");
+      out.write("                                        <th>Action</th>\n");
+      out.write("                                    </tr>\n");
+      out.write("                                </thead>\n");
+      out.write("                                <tbody>\n");
+      out.write("                                    ");
+
+                                        ArrayList<FolderJoinLessionJoinUsers> li = listFolder.getAllLessionInData(value.getFid() + "");
+                                        for (int j = 0; j < li.size(); j++) {
+                                    
+      out.write("\n");
+      out.write("                                    <tr>\n");
+      out.write("                                        <td> ");
+      out.print( li.get(j).getLid());
+      out.write("</td>\n");
+      out.write("                                        <td>");
+      out.print( li.get(j).getTitle());
+      out.write("</td>\n");
+      out.write("                                        <td>");
+ switch (li.get(j).getShare()) {
+                                                case 1:
+                                                    out.print("OnlyMe");
+                                                    break;
+                                                case 2:
+                                                    out.print("For User");
+                                                    break;
+                                                case 3:
+                                                    out.print("Public");
+                                                    break;
+                                            }
+      out.write("</td>\n");
+      out.write("                                        <td><a href=\".\\EditLession.jsp?lid= ");
+      out.print( li.get(j).getLid());
+      out.write("\" class=\"btn btn-info btn-circle\"><i class=\"fa fa-check\"></i>\n");
+      out.write("                                            </a><a href=\".\\DeleteLession.jsp?lid= ");
+      out.print( li.get(j).getLid());
+      out.write("\" class=\"btn btn-warning btn-circle\"><i class=\"fa fa-times\"></i>\n");
+      out.write("                                            </a></td>\n");
+      out.write("                                    </tr>\n");
+      out.write("                                    ");
+ }
+      out.write("\n");
+      out.write("                                </tbody>\n");
+      out.write("                            </table>\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("                        </div>\n");
+      out.write("                        ");
+  } else {
+      out.write("\n");
+      out.write("                        <div role=\"tabpanel\" class=\"tab-pane\" id=\"");
+      out.print( value.getFid());
+      out.write("\">\n");
+      out.write("\n");
+      out.write("                            <table class=\"table table-striped table-hover \">\n");
+      out.write("                                <thead>\n");
+      out.write("                                    <tr>\n");
+      out.write("                                        <th>#</th>\n");
+      out.write("                                        <th>Lesson</th>\n");
+      out.write("                                        <th>Share</th>\n");
+      out.write("                                        <th>Action</th>\n");
+      out.write("                                    </tr>\n");
+      out.write("                                </thead>\n");
+      out.write("                                <tbody>\n");
+      out.write("                                    ");
+
+                                        ArrayList<FolderJoinLessionJoinUsers> li = listFolder.getAllLessionInData(value.getFid() + "");
+                                        for (int j = 0; j < li.size(); j++) {
+                                    
+      out.write("\n");
+      out.write("                                    <tr>\n");
+      out.write("                                        <td> ");
+      out.print( li.get(j).getLid());
+      out.write("</td>\n");
+      out.write("                                        <td>");
+      out.print( li.get(j).getTitle());
+      out.write("</td>\n");
+      out.write("                                        <td>");
+ switch (li.get(j).getShare()) {
+                                                case 1:
+                                                    out.print("OnlyMe");
+                                                    break;
+                                                case 2:
+                                                    out.print("For User");
+                                                    break;
+                                                case 3:
+                                                    out.print("Public");
+                                                    break;
+                                            }
+      out.write("</td>\n");
+      out.write("                                        \n");
+      out.write("                                        <td><a href=\".\\EditLession.jsp?lid= ");
+      out.print( li.get(j).getLid());
+      out.write("\" class=\"btn btn-info btn-circle\"><i class=\"fa fa-check\"></i>\n");
+      out.write("                                            </a><a href=\".\\DeleteLession.jsp?lid= ");
+      out.print( li.get(j).getLid());
+      out.write("\" class=\"btn btn-warning btn-circle\"><i class=\"fa fa-times\"></i>\n");
+      out.write("                                            </a></td>\n");
+      out.write("                                    </tr>\n");
+      out.write("                                    ");
+ }
+      out.write("\n");
+      out.write("                                </tbody>\n");
+      out.write("                            </table>\n");
+      out.write("\n");
+      out.write("                        </div>\n");
+      out.write("                        ");
+  }
+                                i++;
+                            }
+      out.write("\n");
+      out.write("\n");
       out.write("                    </div>\n");
+      out.write("                    ");
+  }
       out.write("\n");
       out.write("                </div>\n");
       out.write("            </div>\n");
       out.write("\n");
       out.write("        </div>\n");
+      out.write("        <div class=\"panel panel-default\">\n");
+      out.write("            <div class=\"panel-heading\">\n");
+      out.write("                Lession not have Folder\n");
+      out.write("            </div>\n");
+      out.write("            <div class=\"panel-body\">\n");
+      out.write("                <table class=\"table table-striped table-hover \">\n");
+      out.write("                    <thead>\n");
+      out.write("                        <tr>\n");
+      out.write("                            <th>#</th>\n");
+      out.write("                            <th>Name</th>\n");
+      out.write("                            <th>Share</th>\n");
+      out.write("                            <th>Action</th>\n");
+      out.write("                        </tr>\n");
+      out.write("                    </thead>\n");
+      out.write("                    <tbody>\n");
+      out.write("                        ");
+ if (user.getListLession() != null) {
+                                for (Map.Entry<Integer, Lesson> entry : user.getListLession().entrySet()) {
+                                    Lesson value = entry.getValue();
+                        
       out.write("\n");
+      out.write("                        <tr>\n");
+      out.write("                            <td> ");
+      out.print( value.getLid());
+      out.write("</td>\n");
+      out.write("                            <td>");
+      out.print( value.getTitle());
+      out.write("</td>\n");
+      out.write("                            <td>");
+ switch (value.getShare()) {
+                                    case 1:
+                                        out.print("OnlyMe");
+                                        break;
+                                    case 2:
+                                        out.print("For User");
+                                        break;
+                                    case 3:
+                                        out.print("Public");
+                                        break;
+                                }
+      out.write("</td>\n");
+      out.write("                            <td><a href=\".\\EditLession.jsp?lid=");
+      out.print( value.getLid());
+      out.write("\" class=\"btn btn-info btn-circle\"><i class=\"fa fa-check\"></i>\n");
+      out.write("                                </a><a href=\".\\DeleteLession.jsp?lid=");
+      out.print( value.getLid());
+      out.write("\" class=\"btn btn-warning btn-circle\"><i class=\"fa fa-times\"></i>\n");
+      out.write("                                </a></td>\n");
+      out.write("                        </tr>\n");
+      out.write("                        ");
+  } 
+      out.write("\n");
+      out.write("                        ");
+ }
+      out.write("\n");
+      out.write("                    </tbody>\n");
+      out.write("                </table> \n");
+      out.write("            </div>\n");
+      out.write("            <!-- /.panel-body -->\n");
+      out.write("        </div>\n");
       out.write("    </div>\n");
       out.write("</div>\n");
       out.write("<!-- /#page-wrapper -->\n");
@@ -328,12 +536,12 @@ public final class AdminUserPage_jsp extends org.apache.jasper.runtime.HttpJspBa
       out.write("<!-- Custom Theme JavaScript -->\n");
       out.write("<script src=\"./style/js/sb-admin-2.js\"></script>\n");
       out.write("<script src=\"./style/js/bootstrap.min.js\"></script>\n");
-      out.write("<script src=\"./style/js/angular.min.js\"></script>\n");
+      out.write(" <script src=\"./style/js/angular_style.js\"></script>\n");
       out.write("\n");
       out.write("<!-- DataTables JavaScript -->\n");
       out.write("<script src=\"./style/js/jquery.dataTables.min.js\"></script>\n");
       out.write("<script src=\"./style/js/dataTables.bootstrap.min.js\"></script>\n");
-      out.write("<script src=\"./style/js/angular_style.js\"></script>\n");
+      out.write("\n");
       out.write(" <script>\n");
       out.write("    $(document).ready(function() {\n");
       out.write("        $('#dataTables-example').DataTable({\n");

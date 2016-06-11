@@ -172,12 +172,5 @@ public class ListUser {
         return false;
     }
 
-    public static void main(String[] args) {
-        ListUser list = new ListUser();
-        list.getListData();
-        Users newAdd = list.SearchUser(2);
-        System.out.println(newAdd.getListLession());
-
-    }
 
 }

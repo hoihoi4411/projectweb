@@ -39,7 +39,7 @@ GO
 ALTER TABLE Pro_Folder_PK_Pro_Lesson ADD CONSTRAINT Pro_Folder_PK_Pro_Lesson_FK_Pro_Lesson FOREIGN KEY (lid) REFERENCES Pro_Lesson
 GO
 /*!--Insert table in Pro_Users */
-INSERT INTO Pro_Users (username,password,permission) VALUES (N'dungnguyen','cd25f444d32e6d98ba7f7ed9c4bd8241ee64603d93993e901b1a4c172ac4b21b',2); 
+INSERT INTO Pro_Users (username,password,permission) VALUES (N'admin','cd25f444d32e6d98ba7f7ed9c4bd8241ee64603d93993e901b1a4c172ac4b21b',2); 
 INSERT INTO Pro_Users (username,password,permission) VALUES (N'hoatran','d8b663a8ad773c895e9aae849926320523c8f2fbf5a3913936fa5598a0ad12d0',2); 
 INSERT INTO Pro_Users (username,password,permission) VALUES (N'hienle','929affbab50b0deae4d264104b30113109f5e7ba5d0c12e6ac449ebc2e58e846',2); 
 INSERT INTO Pro_Users (username,password,permission) VALUES (N'huyngoc','dad39b943ec82d704ba487d27a3906930f3535de2f3d11e20085acd2d6be302b',2); 

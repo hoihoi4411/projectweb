@@ -57,7 +57,6 @@ public class DBConnect {
         if (where.equals("")) {
             SQL = "SElECT * FROM " + table;
         }
-        System.out.println(SQL);
         query = connect.prepareStatement(SQL);
         ResultSet relts = query.executeQuery();
         return relts;
@@ -311,17 +310,12 @@ public class DBConnect {
         Statement st;
         try {
             String sql = "delete from " + TABLE_LESSON_PK_FOLDER + " where " + FIELD_TABLE_LESSON_PK_FOLDER[0] + " = " + fid + " and " + FIELD_TABLE_LESSON_PK_FOLDER[1] + " = " + lid;
-            System.out.println(sql);
             st = connect.createStatement();
             st.execute(sql);
-            return true;
+            
         } catch (SQLException ex) {
             return false;
         }
-    }
-
-    public static void main(String[] args) {
-        DBConnect DB = new DBConnect();
-        System.out.println(DB.deleteLessonInfolder("2", "1"));
+        return true;
     }
 }

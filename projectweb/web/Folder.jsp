@@ -110,15 +110,16 @@
         }
         if (request.getParameter("token") != null && request.getParameter("token").equals(session.getAttribute("token")) && request.getParameter("deleteLesson") != null) {
             boolean resut = false;
+            String outP = "a";
             for (int i = 0; i < listLession.size(); i++) {
                 String idLeson = request.getParameter("lesson" + listLession.get(i).getLid());
+                outP += idLeson + " ";
+                out.print(request.getParameter("lesson1"));
                 if (idLeson != null && Integer.parseInt(idLeson) == listLession.get(i).getLid()) {
                     resut = list.DeleteLessionInFolder(idLeson, request.getParameter("fid"));
                 }
-                if (resut == false) {
-                    break;
-                }
             }
+           
             if (resut) {
                 try {
                     response.sendRedirect("./Folder.jsp?fid=" + fid);
@@ -165,6 +166,7 @@
         </div>
         <%}%>
     </div>
+    <% if (session.getAttribute("user") != null || ck == true) {%>
     <div class="col-lg-4">
         <ul class="list-group">
             <% if (UsersSession != null) {
@@ -203,7 +205,12 @@
             </li>
         </ul>
     </div>
-    <div class="col-lg-8">
+    <%}%>
+    <div class=" <% if (session.getAttribute("user") != null || ck == true) {
+            out.print("col-lg-8");
+        } else {
+            out.print("col-lg-12");
+        } %>">
         <% session.removeAttribute("alert-sucess");
             session.removeAttribute("alert");
             if (checkEdit) {%>
@@ -274,7 +281,7 @@
                         </tbody>
                     </table>
                     <% if (checkEdit) {%>
-                    <input type="hidden" value="<%  session.setAttribute("token", Hash.generateToken());
+                           <input type="hidden" value="<%  session.setAttribute("token", Hash.generateToken());
                                out.print(session.getAttribute("token"));%>" name="token">
                     <input type="submit" value="Xóa Lession" class="btn btn-info" name="deleteLesson"/>
                     <a href="./AddNewLessonFolder.jsp?fid=<%= request.getParameter("fid")%>"  class="btn btn-danger" name=""/> <i class="fa fa-plus-square" aria-hidden="true"></i> Thêm bài học</a>
