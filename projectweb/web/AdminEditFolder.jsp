@@ -122,7 +122,7 @@
                <input type="hidden" value="<%  session.setAttribute("token", Hash.generateToken());
      out.print(session.getAttribute("token"));%>" name="token">
                 <div class="form-group">
-                    <input class="btn btn-primary" type="submit" value="Thêm thư mục mới">
+                    <input class="btn btn-primary" type="submit" value="Cập nhập">
                 </div>
             </form>
         </div>

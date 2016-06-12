@@ -54,7 +54,7 @@ public class Users {
 
     public boolean isLoggin(String username, String password) {
         try {
-            String where = "username = '" + username + "' and password = '" + Hash.Sha256(password + username) + "'";
+            String where = "username = '" + username + "' and password = '" + Hash.Sha256(password) + "'";
             int count = DB.toCountTable(DB.TABLE_USERS, where);
             if (count == 1) {
                 return true;

@@ -89,7 +89,7 @@ public class ListUser {
             int count = DB.toCountTable(DB.TABLE_USERS, "username = '" + username + "'");
             if (count == 0) {
                 if (validation.StringFormatOnlyLetterAndDigits(username, 5, 30, "username") && validation.StringFormatMinMax(password, 5, 15, "password") && validation.NumberFormatMinMax(permisson, 1, 2, "permission")) {
-                    return DB.InsertUsers(DB.TABLE_USERS, username, Hash.Sha256(password + username), Integer.parseInt(permisson));
+                    return DB.InsertUsers(DB.TABLE_USERS, username, Hash.Sha256(password), Integer.parseInt(permisson));
                 }
             }
             return false;
@@ -152,7 +152,7 @@ public class ListUser {
                 }
             }
             if (count <= 1 && validation.NumberFormatMinMax(permission, 1, 2, "permisson") && validation.StringFormatMinMax(password, 5, 15, "password")) {
-                String set = DB.FIELD_TABLE_USERS[1] + " = '" + username + "'," + DB.FIELD_TABLE_USERS[2] + "= '" + Hash.Sha256(password + username) + "', " + DB.FIELD_TABLE_USERS[3]
+                String set = DB.FIELD_TABLE_USERS[1] + " = '" + username + "'," + DB.FIELD_TABLE_USERS[2] + "= '" + Hash.Sha256(password) + "', " + DB.FIELD_TABLE_USERS[3]
                         + " = " + Integer.parseInt(permission);
                 String where = DB.FIELD_TABLE_USERS[0] + " = " + uid + "";
                 return DB.Update(DB.TABLE_USERS, set, where);

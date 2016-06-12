@@ -24,7 +24,7 @@ public class Admin extends Users {
     public boolean isAdmin(String username, String password) {
         try {
             for (int i = 0; i < idAdmin.length; i++) {
-                String where = "username = '" + username + "' and password = '" + Hash.Sha256(password + username) + "' and uid = " + idAdmin[i];
+                String where = "username = '" + username + "' and password = '" + Hash.Sha256(password) + "' and uid = " + idAdmin[i];
                 int count = DB.toCountTable(DB.TABLE_USERS, where);
                 if (count == 1) {
                     return true;

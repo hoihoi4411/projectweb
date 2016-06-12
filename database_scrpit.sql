@@ -41,11 +41,11 @@ GO
 ALTER TABLE Pro_Folder_PK_Pro_Lesson ADD CONSTRAINT Pro_Folder_PK_Pro_Lesson_FK_Pro_Lesson FOREIGN KEY (lid) REFERENCES Pro_Lesson
 GO
 /*!--Insert table in Pro_Users */
-INSERT INTO Pro_Users (username,password,permission) VALUES (N'admin','2daceebc4e31654d326ae7889b397ed50ff7e5afff374d1f89525865fd87efe0',1); 
-INSERT INTO Pro_Users (username,password,permission) VALUES (N'hoatran','d8b663a8ad773c895e9aae849926320523c8f2fbf5a3913936fa5598a0ad12d0',2); 
-INSERT INTO Pro_Users (username,password,permission) VALUES (N'hienle','929affbab50b0deae4d264104b30113109f5e7ba5d0c12e6ac449ebc2e58e846',2); 
-INSERT INTO Pro_Users (username,password,permission) VALUES (N'huyngoc','dad39b943ec82d704ba487d27a3906930f3535de2f3d11e20085acd2d6be302b',2); 
-INSERT INTO Pro_Users (username,password,permission) VALUES (N'hungly','cdba3d71ad055a77123337596246a5623cc95c60bc7ec2a831bbf13ed9eb2265',2); 
+INSERT INTO Pro_Users (username,password,permission) VALUES (N'admin','8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92',1); 
+INSERT INTO Pro_Users (username,password,permission) VALUES (N'hoatran','8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92',2); 
+INSERT INTO Pro_Users (username,password,permission) VALUES (N'hienle','8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92',2); 
+INSERT INTO Pro_Users (username,password,permission) VALUES (N'huyngoc','8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92',2); 
+INSERT INTO Pro_Users (username,password,permission) VALUES (N'hungly','8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92',2); 
 
 INSERT INTO Pro_Folder (name,sharefolder,uid) VALUES (N'Tiếng Nhật',1,2); 
 INSERT INTO Pro_Folder (name,sharefolder,uid)  VALUES (N'Tiếng Anh',2,2); 

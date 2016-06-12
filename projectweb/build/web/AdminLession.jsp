@@ -4,7 +4,8 @@
 <%    ListLession listLession = new ListLession();
     listLession.getData();
     HashMap<Integer, Lesson> list = listLession.getListLession();
-
+    ListUser listUser = new ListUser();
+    listUser.getListData();
 %>
 
 <div id="page-wrapper">
@@ -46,7 +47,7 @@
                         <tr>
                             <td> <%= key %></td>
                             <td><a href="./AdminLessionPage.jsp?lid=<%= key%>"><%= value.getTitle() %></a></td>
-                            <td><%= value.getUid() %></td>
+                            <td><a href="./AdminUserPage.jsp?uid=<%= listUser.SearchUser(value.getUid()).getUid()%>"><%= listUser.SearchUser(value.getUid()).getUsername()  %></a></td>
                             <td>
                             <%
                                 switch (value.getShare()) {
